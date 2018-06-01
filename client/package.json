@@ -1,0 +1,25 @@
+{
+  "name": "magic-mirror",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/electron.js",
+  "dependencies": {
+    "concurrently": "^3.5.1",
+    "electron": "^2.0.2",
+    "electron-builder": "^20.14.7",
+    "electron-is-dev": "^0.3.0",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
+    "react-scripts": "1.1.4",
+    "react-weathericons": "^1.0.4",
+    "wait-on": "^2.1.0",
+    "weathericons": "^2.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

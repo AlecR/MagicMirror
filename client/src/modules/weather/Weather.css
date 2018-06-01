@@ -1,0 +1,48 @@
+.weather {
+    background-color: gray;
+}
+
+.weather-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.weather-current-temp {
+    font-size: 70px;
+    margin: 0 0 0 20px;
+    font-weight: lighter;
+}
+
+.weather-location {
+    text-align: left;
+    margin: 0;
+    font-size: 30px;
+}
+
+.forecast-table {
+    border-spacing: 10px;
+}
+
+.forecast-day {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.forecast-icon {
+    display: block;
+}
+
+.forecast-high {
+    font-size: 25px;
+    padding-left: 5px;
+    font-weight: lighter;
+}
+
+.forecast-low {
+    font-size: 25px;
+    color: gray;
+    font-weight: lighter;
+}
