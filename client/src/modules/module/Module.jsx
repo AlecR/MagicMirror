@@ -1,8 +1,9 @@
 import React from 'react';
-import DraggablePopOut from '../popout/DraggablePopOut'
+import DraggablePopout from '../popout/DraggablePopout'
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 import { addPopout, removePopout, togglePopout } from '../../actions/index'
+import { RegisterPopoutContext } from '../../MagicMirror'
 
 import './Module.css'
 
@@ -45,14 +46,10 @@ class Module extends React.Component {
     popoutWidth: PropTypes.number,
   }
 
-  static contextTypes = {
-    store: PropTypes.object.isRequired
-  }
-
   constructor(props) {
     super(props)
     this.state = {
-      showingPopOutView: this.props.isShowing
+      showingPopoutView: this.props.isShowing
     }
   }
 
@@ -70,7 +67,7 @@ class Module extends React.Component {
 
   render() {
     const popout = this.props.isVisible && this.props.popOutView ? (
-      <DraggablePopOut
+      <DraggablePopout
         id={this.props.name}
         left={this.props.left}
         top={this.props.top}
@@ -78,7 +75,7 @@ class Module extends React.Component {
         width={this.props.popoutWidth}
       >
         {this.props.popOutView}
-      </DraggablePopOut>
+      </DraggablePopout>
     ) : null
 
     return (
@@ -90,8 +87,12 @@ class Module extends React.Component {
           {this.props.children}
         </div>
         {popout}
+        <RegisterPopoutContext.Consumer>
+          {register => register(popout)}
+        </RegisterPopoutContext.Consumer>
       </div>
       
+
     )
   }
 }

@@ -23,3 +23,13 @@ export const movePopout = (id, top, left) => ({
   top,
   left
 })
+
+export const setActivePopout = id => ({
+  type: 'SET_ACTIVE_POPOUT',
+  id
+})
+
+export const resetActivePopout = id => ({
+  type: 'RESET_ACTIVE_POPOUT',
+  id
+})

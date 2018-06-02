@@ -1,36 +1,58 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { DragLayer } from 'react-dnd'
-import { ItemTypes } from '../../lib/Constants'
-import PopOutDragPreview from './PopOutDragPreview'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { DragLayer } from 'react-dnd';
+import { ItemTypes } from '../../lib/Constants';
+import PopoutDragPreview from './PopoutDragPreview';
+import { connect} from 'react-redux';
 
 const layerStyles = {
 	position: 'fixed',
 	pointerEvents: 'none',
 	zIndex: 100,
 	left: 0,
-	top: 0,
-	width: '25%',
-	height: '100%',
-}
+  top: 0,
+  height: '100%',
+  width: '100%',
+};
 
-function getItemStyles(props) {
+const getItemStyles = (props) => {
   const { initialOffset, currentOffset } = props
   if (!initialOffset || !currentOffset) {
 		return {
 			display: 'none',
 		}
   }
+
+
+  const x = initialOffset.x - currentOffset.x;
+  const y = initialOffset.y - currentOffset.y;
+  console.log(x, y);
+
+  const transform = `translate(${-x}px, ${-y}px)`
   
-  let { x, y } = currentOffset 
-  const transform = `translate(${x}px, ${y}px)`
-  return {
-    transform,
+	return {
+		transform,
     WebkitTransform: transform,
+    height: props.height,
+    width: props.width,
   }
 }
 
-function collect(monitor) {
+const mapStateToProps = (state, props) => {
+  if (!state.activePopout) { return {} }
+  const activePopout = props.popouts.find(popout => {
+    return popout.props.id === state.activePopout
+  })
+  return {
+    activePopout: activePopout,
+    top: activePopout.props.top,
+    left: activePopout.props.left,
+    height: activePopout.props.height,
+    width: activePopout.props.width,
+  }
+}
+
+const collect = (monitor) => {
   return {
     item: monitor.getItem(),
     itemType: monitor.getItemType(),
@@ -40,7 +62,7 @@ function collect(monitor) {
   }
 }
 
-class PopOutDragLayer extends Component {
+class PopoutDragLayer extends Component {
   static propTypes = {
     item: PropTypes.object,
     itemType: PropTypes.string,
@@ -58,7 +80,7 @@ class PopOutDragLayer extends Component {
   renderItem(type, item) {
     switch(type) {
       case ItemTypes.POPOUTVIEW:
-        return <PopOutDragPreview />
+        return this.props.activePopout
       default:
         return null
     }
@@ -81,4 +103,8 @@ class PopOutDragLayer extends Component {
   }
 }
 
-export default DragLayer(collect)(PopOutDragLayer);
+const popoutDragLayer = DragLayer(collect)(PopoutDragLayer)
+export default connect(
+  mapStateToProps,
+  null
+)(popoutDragLayer);

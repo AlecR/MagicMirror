@@ -29,14 +29,14 @@ const mapDispatchToProps = (dispatch, props) => {
   }
 }
 
-const popOutTarget = {
+const popoutTarget = {
   drop(props, monitor, component) {
     const delta = monitor.getDifferenceFromInitialOffset()
-    const item = monitor.getItem()
-    let left = Math.round(item.left + delta.x)
-    let top = Math.round(item.top + delta.y)
+    const module = monitor.getItem()
+    let left = Math.round(module.left + delta.x)
+    let top = Math.round(module.top + delta.y)
      
-    component.movePopOut(item.id, top, left)
+    component.movePopout(module.id, top, left)
   }
 }
 
@@ -53,16 +53,7 @@ class DropTargetLayer extends Component {
     connectDropTarget: PropTypes.func.isRequired,
   }
 
-  shouldComponentUpdate = shouldPureComponentUpdate
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      popOuts: []
-    }
-  }
-
-  movePopOut(id, top, left) {
+  movePopout(id, top, left) {
     this.props.movePopout(id, top, left)
   }
 
@@ -80,7 +71,7 @@ class DropTargetLayer extends Component {
   }
 }
 
-const dropTargetLayer = DropTarget(ItemTypes.POPOUTVIEW, popOutTarget, collect)(DropTargetLayer)
+const dropTargetLayer = DropTarget(ItemTypes.POPOUTVIEW, popoutTarget, collect)(DropTargetLayer)
 export default connect(
   mapStateToProps,
   mapDispatchToProps

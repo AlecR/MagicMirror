@@ -1,15 +1,15 @@
 import React from 'react';
 import './Clock.css';
 import Module from '../module/Module.jsx';
-import ClockPopout from './ClockPopOut';
+import ClockPopout from './ClockPopout';
 
 class Clock extends React.Component {
 
+  // TODO: Make options configurable
   dateOptions = { weekday: 'long', month: 'long', day: 'numeric'};
   timeHourMinutesOptions = { hour: 'numeric', minute: '2-digit' }
   timeSecondsOptions = {second: '2-digit'}
   locale = 'en-US';
-
 
   constructor(props) {
     super(props);
