@@ -1,7 +1,7 @@
 export const addPopout = (id, height, width) => ({
   type: 'ADD_POPOUT',
-  left: window.innerWidth / 2,
-  top: window.innerHeight / 2,
+  left: (window.innerWidth / 2) - (width / 2),
+  top: (window.innerHeight / 2) - (height / 2),
   id,
   height,
   width,

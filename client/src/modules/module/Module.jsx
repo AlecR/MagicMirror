@@ -29,7 +29,7 @@ const mapDispatchToProps = (dispatch, props) => {
       dispatch(togglePopout(props.name))
     },
     addPopout: () => {
-      dispatch(addPopout(props.name))
+      dispatch(addPopout(props.name, props.popoutHeight, props.popoutWidth))
     },
     removePopout: () => {
       dispatch(removePopout(props.name))

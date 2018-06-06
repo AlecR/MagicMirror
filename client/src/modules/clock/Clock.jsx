@@ -2,6 +2,7 @@ import React from 'react';
 import './Clock.css';
 import Module from '../module/Module.jsx';
 import ClockPopout from './ClockPopout';
+import CalendarHelper from './CalendarHelper.js';
 
 class Clock extends React.Component {
 
@@ -27,12 +28,16 @@ class Clock extends React.Component {
     );
   }
 
+  componentWillUnmount() {
+    clearInterval();
+  }
+
   tick() {
     const dateInfo = new Date()
     const date = dateInfo.toLocaleDateString(this.locale, this.dateOptions);
     const timeHourMinutes = dateInfo.toLocaleTimeString(this.locale, this.timeHourMinutesOptions).split(' ')[0];
     var timeSeconds = dateInfo.toLocaleTimeString(this.locale, this.timeSecondsOptions);
-    timeSeconds = this.padSeconds(timeSeconds)
+    timeSeconds = this.padSeconds(timeSeconds);
     this.setState({date, timeHourMinutes, timeSeconds});
   }
 
@@ -40,7 +45,7 @@ class Clock extends React.Component {
     if (seconds < 10) {
       return `0${seconds}`;
     } else {
-      return seconds
+      return seconds;
     }
   }
 
@@ -50,8 +55,8 @@ class Clock extends React.Component {
         className='clock'
         name='clock'
         popOutView={<ClockPopout />}
-        popoutHeight={300}
-        popoutWidth={300}
+        popoutHeight={1000}
+        popoutWidth={1000}
       >
         <div className='clock-time'>
           <span className='clock-hour-minutes'>{this.state.timeHourMinutes}</span><span className='clock-seconds'>{this.state.timeSeconds}</span>

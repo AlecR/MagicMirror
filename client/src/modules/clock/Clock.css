@@ -30,7 +30,95 @@
     border: 2px solid white;
     background-color: black;
     position: relative;
-    height: 300px;
-    width: 300px;
+    height: 100%;
+    width: 100%;
     cursor: move;
+}
+
+/** CALENDAR CUSTOMIZATION */
+
+.rbc-calendar {
+    height: 100%;
+}
+
+.rbc-toolbar-label {
+    margin-top: 10px;
+    font-weight: lighter;
+    font-size: 30px;
+}
+
+.rbc-calendar {
+    color: white;
+}
+
+.rbc-btn-group button[type='button'] {
+    display: block;
+}
+
+.rbc-day-bg.rbc-today  {
+    background: black;
+}
+
+.rbc-day-bg.rbc-off-range-bg {
+    background-color: black;
+}
+
+.rbc-date-cell {
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+.rbc-date-cell.rbc-off-range {
+    color: black;
+}
+
+.rbc-date-cell.rbc-now a {
+    background: red;
+    padding: 5px;
+    font-weight: lighter;
+    border-radius: 100%
+}
+
+.custom-toolbar {
+    width: 95%;
+    margin: 10px auto;
+    display: flex;
+}
+
+.custom-toolbar button {
+    box-shadow: none;
+    background-color: black;
+    border: none;
+    font-size: 50px;
+    line-height: 20px;
+    height: 50px;
+    width: 50px;
+
+    color: white;
+}
+
+.custom-toolbar button:active {
+    outline: none;
+}
+
+.custom-toolbar button:focus {
+    outline: none;
+}
+
+.prev-month-button {
+    float: left;
+}
+
+.date-label {
+    text-align: center;
+    clear: both;
+    font-size: 30px;
+    font-weight: lighter;
+    margin: 0 auto;
+    display: inline-block;
+    line-height: 50px;
+}
+
+.next-month-button {
+    float: right;
 }
