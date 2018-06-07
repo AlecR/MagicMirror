@@ -75,15 +75,6 @@ class PopoutDragLayer extends Component {
 		isDragging: PropTypes.bool.isRequired,
   }
 
-  renderItem(type, item) {
-    switch(type) {
-      case ItemTypes.POPOUTVIEW:
-        return this.props.activePopout
-      default:
-        return null
-    }
-  }
-
   render() {
     const { item, itemType, isDragging } = this.props
 
@@ -94,7 +85,7 @@ class PopoutDragLayer extends Component {
     return (
       <div style={layerStyles}>
 				<div style={getItemStyles(this.props)}>
-					{this.renderItem(itemType, item)}
+					{this.props.activePopout}
 				</div>
 			</div>
     )
