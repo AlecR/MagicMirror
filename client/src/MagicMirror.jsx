@@ -21,6 +21,7 @@ class MagicMirror extends Component {
       if(popout.props.id === ref.props.id) {
         if(popout.props.top === ref.props.top && popout.props.left === ref.props.left) {
           noChange = true
+          return popout;
         } else {
           replacedRef = true;
           return ref;

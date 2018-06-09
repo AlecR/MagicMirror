@@ -25,7 +25,7 @@ const popoutSource = {
     return { id, title, left, top }
   },
   endDrag(props) {
-    const { id, left, top, dispatch } = props;
+    const { id, dispatch } = props;
     dispatch(resetActivePopout(id));
   }
 }

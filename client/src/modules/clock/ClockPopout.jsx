@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Calendar, { View } from 'react-big-calendar';
-import CalendarHelper from './CalendarHelper';
+import Calendar from 'react-big-calendar';
 import moment from 'moment';
 
 import "react-big-calendar/lib/css/react-big-calendar.css";

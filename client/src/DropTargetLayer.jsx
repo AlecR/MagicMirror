@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DropTarget } from 'react-dnd';
 import { ItemTypes } from './lib/Constants';
-import { shouldPureComponentUpdate } from './lib/DndHelper';
 import { movePopout } from './actions/index';
 import { connect } from 'react-redux';  
-import Dashboard from '../src/Dashboard';
 
 const styles = {
   position: 'fixed',

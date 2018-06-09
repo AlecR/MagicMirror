@@ -76,13 +76,14 @@ class Clock extends React.Component {
       <Module 
         className='clock'
         name='clock'
-        popOutView={<ClockPopout 
+        popoutHeight={1000}
+        popoutWidth={1000}
+        popoutView={<ClockPopout 
           events={this.state.events}
           date={this.state.date}
           onDateChange={this.updateCalendarDate}
         />}
-        popoutHeight={1000}
-        popoutWidth={1000}
+        
       >
         <div className='clock-time'>
           <span className='clock-hour-minutes'>{this.state.timeHourMinutes}</span><span className='clock-seconds'>{this.state.timeSeconds}</span>

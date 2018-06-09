@@ -41,7 +41,7 @@ class Module extends React.Component {
 
   static propTypes = {
     name: PropTypes.string.isRequired,
-    popOutView: PropTypes.object,
+    popoutView: PropTypes.object,
     popoutHeight: PropTypes.number,
     popoutWidth: PropTypes.number,
   }
@@ -54,19 +54,19 @@ class Module extends React.Component {
   }
 
   componentDidMount() {
-    if(this.props.popOutView) {
+    if(this.props.popoutView) {
       this.props.addPopout();
     }
   }
 
   componentWillUnmount() {
-    if(this.props.popOutView) {
+    if(this.props.popoutView) {
       this.props.removePopout();
     }
   }
 
   render() {
-    const popout = this.props.isVisible && this.props.popOutView ? (
+    const popout = this.props.isVisible && this.props.popoutView ? (
       <DraggablePopout
         id={this.props.name}
         left={this.props.left}
@@ -74,16 +74,19 @@ class Module extends React.Component {
         height={this.props.popoutHeight}
         width={this.props.popoutWidth}
       >
-        {this.props.popOutView}
+        {this.props.popoutView}
       </DraggablePopout>
     ) : null
 
     return (
       <div 
-        className='module'
+        className='module-wrapper'
         name={this.props.name}
       >
-        <div onClick={this.props.onModuleClick} >
+        <div 
+          onClick={this.props.onModuleClick} 
+          className='module'
+        >
           {this.props.children}
         </div>
         {popout}

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { DragLayer } from 'react-dnd';
-import { ItemTypes } from '../../lib/Constants';
-import PopoutDragPreview from './PopoutDragPreview';
 import { connect} from 'react-redux';
 
 const layerStyles = {
@@ -76,7 +74,7 @@ class PopoutDragLayer extends Component {
   }
 
   render() {
-    const { item, itemType, isDragging } = this.props
+    const { isDragging } = this.props
 
     if(!isDragging) {
       return null

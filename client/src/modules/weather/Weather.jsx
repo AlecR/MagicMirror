@@ -2,8 +2,8 @@ import React from 'react';
 import WeatherHelper from './WeatherHelper.js';
 import WeatherIcons from 'react-weathericons';
 import Module from '../module/Module.jsx';
+import WeatherPopout from './WeatherPopout';
 import 'weathericons/css/weather-icons.css';
-import 'weathericons/css/weather-icons-wind.css';
 import './Weather.css';
 
 class Weather extends React.Component {
@@ -20,6 +20,11 @@ class Weather extends React.Component {
       <Module 
         className='weather'
         name='weather'
+        popoutHeight={600}
+        popoutWidth={400}
+        popoutView={<WeatherPopout 
+          hourlyWeather={this.state.hourlyWeather }
+        />}
       >
         <section className='weather-header'>
           <WeatherIcons
@@ -65,10 +70,46 @@ class Weather extends React.Component {
         const tempLow = parseInt(forecast.temperatureLow, 10);
         const tempHigh = parseInt(forecast.temperatureHigh, 10);
         const weatherCode = forecast.icon;
-        return {day: day, tempLow: tempLow, tempHigh: tempHigh, weatherCode: weatherCode}
+        return {day, tempLow, tempHigh, weatherCode}
       })
       this.setState({currentTemp, weatherCode, forecasts});
     }
+
+    const updateHourlyData = weatherData => {
+      const fullDayData = weatherData.hourly.data.slice(1,25);
+      const filteredData = fullDayData.filter((data, index) => {
+        return index % 3 === 0;
+      })
+      const hourlyWeather = filteredData.map(weatherEntry => {
+        const date = new Date(weatherEntry.time * 1000)
+        const hours = date.getHours()
+        const time = hourToTime(hours);
+        const weatherCode = weatherEntry.icon;
+        const temp = parseInt(weatherEntry.temperature, 10);
+        const precipChance = parseInt(weatherEntry.precipProbability, 10);
+        return { time, weatherCode, temp , precipChance };
+      })
+      this.setState({ hourlyWeather });
+    }
+
+    const hourToTime = hour => {
+      if(hour === 0) {
+        return "12 AM";
+      } else if(hour === 12) {
+        return "12 PM";
+      }
+
+      if (hour <= 12) {
+        return `${hour} AM`;
+      } else {
+        return `${hour-12} PM`;
+      }
+    }
+
+    WeatherHelper.getWeatherData(updateHourlyData)
+    setInterval(() => {
+      WeatherHelper.getWeatherData(updateHourlyData)
+    }, 300000)
 
     WeatherHelper.getWeatherData(updateWeatherData)
     setInterval(() => {

@@ -46,3 +46,72 @@
     color: gray;
     font-weight: lighter;
 }
+
+/** WEATHER POP OUT */
+
+.weather-popout {
+    border: 2px solid white;
+    background-color: black;
+    height: 100%;
+    width: 100%;
+    cursor: move;
+    display: flex;
+    flex-direction: column;
+}
+
+.weather-popout-header {
+    padding-top: 10px;
+    height: 50px;
+    width: 100%;
+    font-weight: lighter;
+}
+
+.weather-popout-header p {
+    margin: 0;
+    text-align: center;
+    font-size: 40px;
+}
+
+.weather-popout-forecast {
+    widows: 100%;
+    flex: 1;
+}
+
+.weather-popout-forecast table {
+    height: 100%;
+    widows: 100%;
+    display: block;
+}
+
+.weather-popout-forecast table tbody {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.weather-popout-forecast tr {
+    display: flex;
+    flex: 1;
+    margin-bottom: 1px;
+}
+
+.weather-popout-forecast tr td {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 30px;
+    font-weight: lighter;
+}
+
+.precip-chance-icon {
+    margin-left: 10px;
+    font-size: 30px;
+}
+
+.popout-forecast-icon {
+    font-size: 40px !important;
+}

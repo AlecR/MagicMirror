@@ -14,7 +14,7 @@ const popouts = (state = [], action) => {
       ]
     case 'REMOVE_POPOUT':
       return state.filter(popout => {
-        popout.id !== action.id
+        return popout.id !== action.id
       })
     case 'TOGGLE_POPOUT':
       return state.map(popout => {
@@ -36,6 +36,7 @@ const popouts = (state = [], action) => {
             left: action.left,
           }
         }
+        return popout
       })
     default:
       return state
