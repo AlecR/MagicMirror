@@ -1,6 +1,0 @@
-.dashboard {
-  display: flex;
-  flex-direction: row-reverse;
-  margin: 30px;
-  height: calc(100%-60px);
-}

@@ -1,0 +1,21 @@
+.dashboard {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 0 30px;
+  height: 100%;
+}
+
+.dashboard-row {
+  display: flex;
+  flex-direction: row;
+  flex: 31;
+}
+
+.dashboard-row-sm {
+  flex: 3;
+}
+
+.module-container {
+  flex: 1;
+}

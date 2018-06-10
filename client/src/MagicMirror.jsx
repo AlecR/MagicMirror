@@ -3,14 +3,30 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import DropTargetLayer from './DropTargetLayer';
 import PopoutDragLayer from './modules/popout/PopoutDragLayer';
-import Dashboard from './Dashboard';
+import Dashboard from './modules/dashboard/Dashboard';
+import ModuleIndex from './ModuleIndex';
 
 export const RegisterPopoutContext = React.createContext()
 
 class MagicMirror extends Component {
 
   state = {
-    popouts: []
+    mirrorModules: [
+      null, null, null, null, null, null,
+      null, null, null, null, null, null,
+    ],
+    popouts: [],
+    availableModules: ModuleIndex
+  }
+
+  componentWillMount() {
+    const mirrorModules = [...this.state.mirrorModules];
+    this.state.availableModules.forEach(module => {
+      if(module.position != null){
+        mirrorModules[module.position] = module.module
+      }
+    })
+    this.setState({ mirrorModules })
   }
 
   registerPopout = (ref) => {
@@ -53,7 +69,9 @@ class MagicMirror extends Component {
       >
         <DropTargetLayer>
           <RegisterPopoutContext.Provider value={this.registerPopout}>
-            <Dashboard />
+            <Dashboard 
+              modules={this.state.mirrorModules}
+            />
           </RegisterPopoutContext.Provider>
         </ DropTargetLayer>
         <PopoutDragLayer

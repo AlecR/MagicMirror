@@ -20,7 +20,6 @@ const mapStateToProps = (state, props) => {
   } else {
     return {}
   }
-  
 }
 
 const mapDispatchToProps = (dispatch, props) => {
