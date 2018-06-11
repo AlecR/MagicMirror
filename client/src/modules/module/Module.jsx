@@ -1,9 +1,9 @@
 import React from 'react';
-import DraggablePopout from '../popout/DraggablePopout'
+import DraggablePopout from '../Popout/DraggablePopout';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
-import { addPopout, removePopout, togglePopout } from '../../actions/index'
-import { RegisterPopoutContext } from '../../MagicMirror'
+import { connect } from 'react-redux';
+import { addPopout, removePopout, togglePopout } from '../../actions/index';
+import { RegisterPopoutContext } from '../../MagicMirror';
 
 import './Module.css'
 

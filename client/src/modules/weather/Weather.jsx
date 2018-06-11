@@ -1,7 +1,7 @@
 import React from 'react';
 import WeatherHelper from './WeatherHelper.js';
 import WeatherIcons from 'react-weathericons';
-import Module from '../module/Module.jsx';
+import Module from '../Module/Module.jsx';
 import WeatherPopout from './WeatherPopout';
 import 'weathericons/css/weather-icons.css';
 import './Weather.css';
@@ -61,6 +61,10 @@ class Weather extends React.Component {
   componentWillMount() {
 
     const updateWeatherData = weatherData => {
+      if(!weatherData) { 
+        console.log('WARNING: Unable to get weather data');
+        return
+      }
       var forecasts = weatherData.daily.data.slice(1, 6);
       const currentTemp = parseInt(weatherData.currently.temperature, 10);
       const weatherCode = weatherData.currently.icon
@@ -76,6 +80,10 @@ class Weather extends React.Component {
     }
 
     const updateHourlyData = weatherData => {
+      if(!weatherData) { 
+        console.log('WARNING: Unable to get hourly weather data');
+        return
+      }
       const fullDayData = weatherData.hourly.data.slice(1,25);
       const filteredData = fullDayData.filter((data, index) => {
         return index % 3 === 0;

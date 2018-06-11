@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import DropTargetLayer from './DropTargetLayer';
-import PopoutDragLayer from './modules/popout/PopoutDragLayer';
-import Dashboard from './modules/dashboard/Dashboard';
-import ModuleIndex from './ModuleIndex';
+import PopoutDragLayer from './modules/Popout/PopoutDragLayer';
+import Dashboard from './modules/Dashboard/Dashboard';
+import ModuleIndex from './config.json';
+import { refreshIndex } from './lib/ModuleIndex';
 
 export const RegisterPopoutContext = React.createContext()
 
@@ -16,14 +17,15 @@ class MagicMirror extends Component {
       null, null, null, null, null, null,
     ],
     popouts: [],
-    availableModules: ModuleIndex
+    moduleIndex: ModuleIndex
   }
 
   componentWillMount() {
+    refreshIndex()
     const mirrorModules = [...this.state.mirrorModules];
-    this.state.availableModules.forEach(module => {
+    this.state.moduleIndex.forEach(module => {
       if(module.position != null){
-        mirrorModules[module.position] = module.module
+        mirrorModules[module.position] = require(`${module.componentFile}`).default
       }
     })
     this.setState({ mirrorModules })

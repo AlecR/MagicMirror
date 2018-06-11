@@ -1,0 +1,1 @@
+[{"position": 2, "name": "Weather", "componentFile": "./modules/Weather/Weather.jsx", "description": "A module for displaying the weather"}, {"position": 4, "name": "Clock", "componentFile": "./modules/Clock/Clock.jsx", "description": "A module for displaying the time and date"}]

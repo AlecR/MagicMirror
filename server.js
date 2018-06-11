@@ -1,6 +1,7 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const bodyParser = require('body-parser');
+const spawn = require('child_process').spawn;
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -22,6 +23,16 @@ app.use(function (req, res, next) {
 });
 
 app.use(bodyParser.json());
+
+app.get('/api/modules/index', (req, res) => {
+    const indexProcess = spawn('python', ['./index_modules.py']);
+    indexProcess.stdout.on('data', data => {
+        const data_string = data.toString();
+        const data_json = JSON.parse(data_string);
+        indexProcess.kill();
+        res.json(data_json);
+    })
+}) 
 
 app.get('/api/weather', (req, res) => {
     const lat = req.query.lat

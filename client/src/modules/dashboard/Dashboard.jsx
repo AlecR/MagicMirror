@@ -4,8 +4,6 @@ import './Dashboard.css';
 export default class Dashboard extends Component { 
 
   render() {
-    console.log("Modules");
-    console.log(this.props.modules);
     const modules = this.props.modules.map(Module => {
       return Module ? <Module /> : null 
     })

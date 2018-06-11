@@ -1,0 +1,5 @@
+{
+  "name": "Clock",
+  "description": "A module for displaying the time and date",
+  "componentFile": "Clock.jsx"
+}
