@@ -93,8 +93,6 @@ class Module extends React.Component {
           {register => register(popout)}
         </RegisterPopoutContext.Consumer>
       </div>
-      
-
     )
   }
 }

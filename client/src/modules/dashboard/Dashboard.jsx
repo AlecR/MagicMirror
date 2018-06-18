@@ -10,7 +10,7 @@ export default class Dashboard extends Component {
     
     return (
       <div className='dashboard'>
-        <section className='dashboard-row dashboard-row-sm'>
+        <section className='dashboard-row-sm'>
           <div className='module-container'>
             {modules[0]}
           </div>
@@ -51,7 +51,7 @@ export default class Dashboard extends Component {
             {modules[10]}
           </div>
         </section>
-        <section className='dashboard-row dashboard-row-sm'>
+        <section className='dashboard-row-sm'>
           <div className='module-container'>
             {modules[11]}
           </div>

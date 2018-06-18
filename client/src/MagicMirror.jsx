@@ -24,39 +24,69 @@ class MagicMirror extends Component {
     refreshIndex()
     const mirrorModules = [...this.state.mirrorModules];
     this.state.moduleIndex.forEach(module => {
-      if(module.position != null){
+      if(module.position !== null){
         mirrorModules[module.position] = require(`${module.componentFile}`).default
       }
     })
     this.setState({ mirrorModules })
   }
 
+  havePropsUpdated = (currentModule, newModule) => {
+    const currentChildren = currentModule.props.children;
+    const newChildren = newModule.props.children;
+
+    var currentProps = currentModule.props;
+    var newProps = newModule.props;
+
+    var currentKeys = Object.keys(currentProps);
+    var newKeys = Object.keys(newProps);
+
+    if(currentChildren){
+      currentProps = {...currentProps, ...currentChildren.props};
+      const childKeys = Object.keys(currentChildren.props);
+      currentKeys = [...currentKeys, ...childKeys];
+    }
+
+    if(newChildren){
+      newProps = {...newProps, ...newChildren.props};
+      const childKeys = Object.keys(newChildren.props);
+      newKeys = [...newKeys, ...childKeys];
+    }
+
+    if(currentKeys.length !== newKeys.length) {
+      return true;
+    }
+
+    for (var index = 0; index < currentKeys.length; index++) {
+      const propKey = currentKeys[index];
+      const currentPropValue = currentProps[propKey];
+      const newPropValue = newProps[propKey];
+      if(propKey !== 'children' &&  currentPropValue !== newPropValue) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   registerPopout = (ref) => {
     if(!ref) { return }
-    var replacedRef = false
-    var noChange = false
-    var popouts = this.state.popouts.map(popout => {
+    for (var index = 0; index < this.state.popouts.length; index++) {
+      const popout = this.state.popouts[index];
       if(popout.props.id === ref.props.id) {
-        if(popout.props.top === ref.props.top && popout.props.left === ref.props.left) {
-          noChange = true
-          return popout;
+        if(this.havePropsUpdated(popout, ref)) {
+          const updatedPopouts = [
+            ...this.state.popouts.slice(0, index), 
+            ref, 
+            ...this.state.popouts.slice(index+1)
+          ]
+          this.setState({ popouts: updatedPopouts })
+          return
         } else {
-          replacedRef = true;
-          return ref;
+          return
         }
-      } else {
-        return popout;
       }
-    });
-    
-    if(noChange) {
-      return 
-    } else if(replacedRef) {
-      this.setState({popouts})
-    } else {
-      popouts = [...this.state.popouts, ref];
-      this.setState({ popouts }); 
-    }       
+    }
+    this.setState({ popouts: [...this.state.popouts, ref]});
   }
 
   render() {

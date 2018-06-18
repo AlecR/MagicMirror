@@ -1,0 +1,155 @@
+.settings {
+  float: right;
+}
+
+.cog {
+  padding-top: 5px;
+}
+
+.settings-popout {
+  border: 1px solid white;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr 9fr;
+  background-color: black;
+}
+
+.settings-popout-body {
+  display: grid;
+  grid-template-columns: 6fr 4fr;
+  margin: 20px;
+}
+
+.settings-popout-header p {
+  padding-top: 10px;
+}
+
+.settings-popout-title {
+  text-align: center;
+  font-size: 30px;
+  margin: 0;
+  font-weight: lighter; 
+}
+
+
+/* ============================================== */
+/* =========== SETTINGS MIRROR LAYOUT =========== */
+/* ============================================== */
+
+.active-mirror-module {
+  background-color: darkred;
+}
+
+.mirror-layout {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin: 0 30px;
+  height: 100%;
+}
+
+.settings-layout-row {
+  display: flex;
+  flex-direction: row;
+  flex: 25;
+}
+
+.settings-layout-row-sm {
+  flex: 5;
+}
+
+.settings-module-container {
+  flex: 1;
+  border: 1px solid white;
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+.settings-module-name {
+  height: 100%;
+  margin: 0;
+  font-size: 20px;
+  vertical-align: middle;
+  justify-content: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* ==================================== */
+/* ========== SETTINGS TABLE ========== */
+/* ==================================== */
+
+.settings-table-wrapper {
+  display: grid;
+}
+
+.active-table-module {
+  float: right;
+  font-size: 15px;
+  margin-top: 5px;
+  margin-right: 5px;
+  padding: 2px;
+  border-radius: 5px;
+  border: 1px solid white;
+}
+
+.edit-mode-box {
+  display: none;
+}
+
+.settings-table {
+  grid-row-start: 1;
+  grid-row-end: 9;
+  border-spacing: 0 20px;
+  width: 100%;
+}
+
+.settings-table caption {
+  font-size: 25px;
+  font-weight: lighter;
+}
+
+.module-header {
+  margin: 0 0 5px 10px;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.module-description {
+  margin: 0 10px;
+  font-weight: lighter;
+  font-size: 20px;
+}
+
+.settings-table-footer {
+  grid-row-start: 9;
+  grid-row-end: 10;
+}
+
+.settings-table-footer button {
+  border: none;
+  color: white;
+  background-color: black;
+  height: 50px;
+  width: 200px;
+  font-size: 25px;
+  display: block;
+  margin: 50px auto 0 auto;
+  outline: none;
+  font-weight: lighter;
+}
+
+.settings-table-footer button:active {
+  color: gray;
+}
+
+.settings-row {
+  display: block;
+}
+
+.selected {
+  background-color: darkred;
+}

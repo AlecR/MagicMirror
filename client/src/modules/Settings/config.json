@@ -1,0 +1,5 @@
+{
+  "name": "Settings",
+  "description": "Module to configure all other modules on the mirror",
+  "componentFile": "Settings.jsx"
+}

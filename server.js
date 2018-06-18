@@ -2,6 +2,7 @@ const express = require('express');
 const fetch = require('node-fetch');
 const bodyParser = require('body-parser');
 const spawn = require('child_process').spawn;
+const fs = require('fs');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -54,6 +55,19 @@ app.get('/api/calendar/', (req, res) => {
         const eventData = parseCalendarData(json)
         res.json(eventData);
     });
+})
+
+app.post('/api/mirror/config', (req, res) => {
+    console.log("UPDATE CONFIG");
+    console.log(JSON.stringify(req.body));
+    const moduleData = JSON.stringify(req.body);
+    fs.writeFile('./client/src/config.json', moduleData, (err) => {
+        if(err) {
+          res.sendStatus(500);
+        } else {
+          res.sendStatus(200);
+        }
+      })
 })
 
 const parseCalendarData = json => {
