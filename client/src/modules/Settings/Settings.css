@@ -8,7 +8,6 @@
 
 .settings-popout {
   border: 1px solid white;
-  height: 100%;
   width: 100%;
   display: grid;
   grid-template-rows: 1fr 9fr;
@@ -18,7 +17,7 @@
 .settings-popout-body {
   display: grid;
   grid-template-columns: 6fr 4fr;
-  margin: 20px;
+  padding: 20px;
 }
 
 .settings-popout-header p {
@@ -46,7 +45,6 @@
   flex: 1;
   flex-direction: column;
   margin: 0 30px;
-  height: 100%;
 }
 
 .settings-layout-row {
@@ -105,6 +103,7 @@
   grid-row-end: 9;
   border-spacing: 0 20px;
   width: 100%;
+  overflow: scroll;
 }
 
 .settings-table caption {
@@ -148,6 +147,13 @@
 
 .settings-row {
   display: block;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.settings-row td {
+  display: block;
+  width: 100%;
 }
 
 .selected {

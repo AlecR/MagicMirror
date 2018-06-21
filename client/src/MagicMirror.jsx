@@ -24,7 +24,7 @@ class MagicMirror extends Component {
     refreshIndex()
     const mirrorModules = [...this.state.mirrorModules];
     this.state.moduleIndex.forEach(module => {
-      if(module.position !== null){
+      if(module.position !== null) {
         mirrorModules[module.position] = require(`${module.componentFile}`).default
       }
     })

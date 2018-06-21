@@ -70,7 +70,6 @@ export default class Settings extends Component {
   render() {
     return (
       <Module 
-        className='settings'
         name='settings'
         popoutHeight={600}
         popoutWidth={1200}
