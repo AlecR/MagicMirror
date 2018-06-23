@@ -6,8 +6,10 @@ const fs = require('fs');
 
 const app = express();
 const port = process.env.PORT || 3001;
-const WEATHER_API_KEY = '211442508a4f74ccbc238952adc10e13'
-const GOOGLE_CALENDAR_API_KEY = 'AIzaSyCdSizt6KqOy3_t_HwUk93fsKOR6Nt1rX0'
+const WEATHER_API_KEY = '211442508a4f74ccbc238952adc10e13';
+const GOOGLE_CALENDAR_API_KEY = 'AIzaSyCdSizt6KqOy3_t_HwUk93fsKOR6Nt1rX0';
+const HUE_IP = '10.0.0.153'
+const HUE_USERNAME = 'cATamjW4q-RKFR0NxTZPMxU4fBaFST3DCf9lga1S';
 
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
@@ -58,8 +60,6 @@ app.get('/api/calendar/', (req, res) => {
 })
 
 app.post('/api/mirror/config', (req, res) => {
-    console.log("UPDATE CONFIG");
-    console.log(JSON.stringify(req.body));
     const moduleData = JSON.stringify(req.body);
     fs.writeFile('./client/src/config.json', moduleData, (err) => {
         if(err) {
@@ -69,6 +69,86 @@ app.post('/api/mirror/config', (req, res) => {
         }
       })
 })
+
+app.get('/api/smartlights/groups', (req, res) => {
+    const requestURL = `http://${HUE_IP}/api/${HUE_USERNAME}/groups`
+    fetch(requestURL).then(response => {
+        return response.json();
+    }).then(json => {
+        const keys = Object.keys(json)
+        const rooms = []
+        keys.forEach(key => {
+            const room = json[key] 
+            if(room.type === 'Room'){
+                rooms.push({
+                    'name': room.name,
+                    'lights': room.lights
+                })
+            }
+        }) 
+        res.json(rooms);
+    }).catch(error => {
+        console.log(error);
+        res.sendStatus(500);
+     })
+})
+
+
+app.get('/api/smartlights/lights', (req, res) => {
+    const id = req.params.id
+    const requestURL = `http://${HUE_IP}/api/${HUE_USERNAME}/lights/`
+    fetch(requestURL).then(response => {
+        return response.json();
+    }).then(lights => {
+        lightIds = Object.keys(lights);
+        var formattedLightData = {}
+        lightIds.forEach(lightId => {
+            const light = lights[lightId];
+            formattedLightData[lightId] = {
+                name: light.name,
+                on: light.state.on,
+                lightId: lightId
+            }
+        })
+        res.json(formattedLightData);
+    }).catch(error => {
+        console.log(error);
+        res.sendStatus(500);
+     })
+})
+
+app.get('/api/smartlights/lights/:id', (req, res) => {
+    const id = req.params.id
+    const requestURL = `http://${HUE_IP}/api/${HUE_USERNAME}/lights/${id}`
+    fetch(requestURL).then(response => {
+        return response.json();
+    }).then(json => {
+        const lightData = {
+            'name': json.name,
+            'on': json.state.on
+        }
+        res.json(lightData);
+    }).catch(error => {
+        console.log(error);
+        res.sendStatus(500);
+     })
+})
+
+app.get('/api/smartlights/lights/:id/:on', (req, res) => {
+    const state = req.params.on
+    const body = {"on":(state === 'true')}
+    console.log(body);
+    const id = req.params.id;
+    const requestURL = `http://${HUE_IP}/api/${HUE_USERNAME}/lights/${id}/state`;
+    fetch(requestURL, {
+        method: "PUT",
+        body: JSON.stringify(body)
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        res.json(json);
+    })
+}) 
 
 const parseCalendarData = json => {
     const events = json.items.map(event => {

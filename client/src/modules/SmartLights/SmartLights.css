@@ -1,5 +1,57 @@
 .smart-lights {
   height: 100%;
   width: 100%;
-  border: 1px solid white;
+}
+
+/*********************************/
+/********* SmartLight.jsx ********/
+/*********************************/
+
+.room-lights {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.smart-light {
+  height: 150px;
+  width: 150px;
+  margin: 10px;
+  display: grid; 
+  grid-template-rows: 1fr 4fr;
+}
+
+.smart-light-name {
+  font-size: 20px;
+  text-align: center;
+  font-weight: lighter;
+}
+
+.smart-light-button {
+  height: 90%;
+  width: 90%;
+  display: block;
+  margin: 0 auto;
+  border: 2px white solid;
+  border-radius: 10px;
+}
+
+.on {
+  background-color: white;
+}
+
+/*********************************/
+/************ Room.jsx ***********/
+/*********************************/
+
+.room {
+  width: 100%;
+  height: 200px;
+  display: grid;
+  grid-template-rows: 1fr 4fr;
+}
+
+.room-name {
+  padding-left: 20px;
+  font-weight: lighter;
+  font-size: 30px;
 }

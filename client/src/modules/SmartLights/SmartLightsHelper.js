@@ -1,20 +1,32 @@
-const username = 'DAnFznZlBxomPBwJljCyyAtBmYvd4D3wO9Pn4Dr0';
-const bridgeIP = '10.0.0.153';
-
 const getRooms = (callback) => {
-  const requestURL = `http://${bridgeIP}/api/${username}/groups`;
-  fetch(requestURL).then(response => {
-    return response.json();
-  }).then(rooms => {
-    const filteredRooms = []
-    Object.keys(rooms).forEach(roomKey => {
-      const room = rooms[roomKey];
-      if(room.type === 'Room'){ 
-        filteredRooms.push(room);
-      }
-    })
-    callback(filteredRooms);
-  });
+  const requestURL = 'http://localhost:3001/api/smartlights/groups';
+  fetchGet(requestURL, callback);
 }
 
-export default { getRooms }
+const getLight = (id, callback) => {
+  const requestURL = `http://localhost:3001/api/smartlights/lights/${id}`;
+  fetchGet(requestURL, callback);
+}
+
+const getAllLights = (callback) => {
+  const requestURL = `http://localhost:3001/api/smartlights/lights`;
+  fetchGet(requestURL, callback);
+}
+
+const toggleLight = (id, on, callback) => {
+  const requestURL = `http://localhost:3001/api/smartlights/lights/${id}/${on}`;
+  fetchGet(requestURL, callback);
+}
+
+const fetchGet = (url, callback) => {
+  fetch(url).then(response => {
+    return response.json();
+  }).then(json => {
+    callback(json);
+  }).catch(error =>{
+    console.log(`[ERROR]: ${url}`);
+    console.log(error);
+  })
+}
+
+export default { getRooms, getLight, getAllLights, toggleLight }
