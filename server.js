@@ -55,6 +55,7 @@ app.get('/api/calendar/', (req, res) => {
         return response.json();
     }).then(json => {
         const eventData = parseCalendarData(json)
+        console.log(eventData);
         res.json(eventData);
     });
 })
@@ -140,7 +141,6 @@ app.get('/api/smartlights/lights/:id', (req, res) => {
 app.get('/api/smartlights/lights/:id/:on', (req, res) => {
     const state = req.params.on
     const body = {"on":(state === 'true')}
-    console.log(body);
     const id = req.params.id;
     const requestURL = `http://${HUE_IP}/api/${HUE_USERNAME}/lights/${id}/state`;
     fetch(requestURL, {
@@ -160,6 +160,7 @@ const parseCalendarData = json => {
             id: event.id,
             start: event.start.dateTime,
             end: event.end.dateTime,
+            location: event.location,
         }
     });
     return events;

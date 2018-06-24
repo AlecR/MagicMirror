@@ -1,4 +1,6 @@
 .clock {
+    height: 100%;
+    width: 100%;
     color: white;
 }
 
@@ -22,6 +24,57 @@
     font-size: 30px;
     text-align: right;
     font-weight: lighter;
+}
+
+/** EVENTS TODAY */
+
+.events-today {
+    padding-top: 20px;
+}
+
+.events-today table {
+    width: 100%;
+}
+
+.events-today caption {
+    display: block;
+    font-size: 22px;
+    font-weight: lighter;
+    width: 100%;
+}
+
+.events-today tr {
+    font-weight: lighter;
+}
+
+.events-today td {
+    padding: 0 20px;
+}
+
+.event-header {
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+.event-title {
+    float: left;
+}
+
+.event-time {
+    float: right;
+}
+
+.event-location {
+    float: clear;
+    font-size: 15px;
+    margin: 10px 0 0 0;
+}
+
+.no-events {
+    padding-top: 40px;
+    font-size: 20px;
+    font-weight: lighter;
+    text-align: right;
 }
 
 /** CLOCK POP OUT */

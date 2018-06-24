@@ -7,4 +7,21 @@ const getCalendarData = (callback) => {
   });
 }
 
-export default { getCalendarData };
+const isSameDay = (dateOne, dateTwo) => {
+  return dateOne.getDate() === dateTwo.getDate()
+    && dateOne.getMonth() === dateTwo.getMonth()
+    && dateOne.getYear() === dateTwo.getYear()
+}
+
+const convertDateToTime = (date, displayAmPm = false) => {
+  const formattedDate = date.toLocaleTimeString(this.locale, { hour: 'numeric', minute: '2-digit' });
+  var time = formattedDate.split(' ')[0];
+  if (displayAmPm) {
+    const hours = date.getHours();
+    const amPm = hours >= 12 ? "PM" : "AM";
+    time = time + ` ${amPm}`; 
+  }
+  return time;
+}
+
+export default { getCalendarData, isSameDay, convertDateToTime };
