@@ -107,6 +107,7 @@ app.get('/api/smartlights/lights', (req, res) => {
             formattedLightData[lightId] = {
                 name: light.name,
                 on: light.state.on,
+                brightness: light.state.bri,
                 lightId: lightId
             }
         })
@@ -124,8 +125,10 @@ app.get('/api/smartlights/lights/:id', (req, res) => {
         return response.json();
     }).then(json => {
         const lightData = {
-            'name': json.name,
-            'on': json.state.on
+            name: json.name,
+            on: json.state.on,
+            brightness: json.state.bri,
+            lightId: id
         }
         res.json(lightData);
     }).catch(error => {

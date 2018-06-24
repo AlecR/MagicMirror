@@ -11,37 +11,26 @@ export default class SmartLights extends Component {
     super(props);
 
     this.state = {
-      rooms: []
+      rooms: [],
+      lights: {}
     }
+
     SmartLightsHelper.getRooms(response => {
       const rooms = response;
-      SmartLightsHelper.getAllLights(response => {
-        const lights = response;
-        const roomLightData = rooms.map(room => {
-          const roomLights = room.lights.map(lightId => {
-            return lights[lightId]
-          });
-          return {
-            name: room.name,
-            lights: roomLights
-          };
-        })
-        this.setState({rooms: roomLightData})
-      })
-    });
+      this.setState({ rooms });
+    })
+
+    SmartLightsHelper.getAllLights(response => {
+      const lights = response;
+      this.setState({ lights });
+    })
   };
 
   toggleLightState = (id) => {
-    const rooms = this.state.rooms;
-    rooms.forEach(room => {
-      room.lights.forEach(light => {
-        if(light.lightId === id) {
-          light.on = !light.on;
-        }
-      })
-    })
-    this.setState(rooms);
-  }
+    const lights = this.state.lights;
+    lights[id].on = !lights[id].on;
+    this.setState({lights});
+  };
 
   toggleLight = (id, on) => {
     SmartLightsHelper.toggleLight(id, on, response => {
@@ -49,23 +38,29 @@ export default class SmartLights extends Component {
         this.toggleLightState(id);
       }
     });
+  };
+
+  updateBrightness = (id, brightness) => {
+    const lights = this.state.lights;
+    lights[id].brightness = brightness;
+    this.setState({ lights })
   }
 
   render() {    
     return(
       <Module
         name='SmartLights'
-        popoutHeight={600}
-        popoutWidth={600}
       >
         <div className='smart-lights'>
           {
-            this.state.rooms.map(roomData => (
+            this.state.rooms.map(room => (
               <Room 
-                key={roomData.name}
-                lights={roomData.lights}
-                name={roomData.name}
+                key={room.name}
+                lights={this.state.lights}
+                lightIds={room.lights}
+                name={room.name}
                 onLightClick={this.toggleLight}
+                updateBrightness={this.updateBrightness}
               />
             ))
           }
