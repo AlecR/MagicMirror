@@ -1,7 +1,6 @@
 import React from 'react';
 
 const ToDoList = (props) => {
-  console.log(props);
   const sortedTasks = props.tasks.sort((taskOne, taskTwo) => {
     const taskOneDate = new Date(taskOne.due.date);
     const taskTwoDate = new Date(taskTwo.due.date);
@@ -47,7 +46,6 @@ const ToDoList = (props) => {
                       />
                     </div>
                   </div>
-                  
                 </td>
               </tr>
             )

@@ -10,8 +10,8 @@ const authorizeUser = (query) => {
     const accessToken = token.access_token;
     document.cookie = `${cookieName}=${accessToken};path=/`;
     window.location.href = "http://localhost:3000/"
-  }).catch(error => {
-    console.log(error);
+  }).catch(err => {
+    console.log(err);
   })
 }
 

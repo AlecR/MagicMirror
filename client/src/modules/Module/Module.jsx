@@ -1,40 +1,9 @@
 import React from 'react';
 import DraggablePopout from '../Popout/DraggablePopout';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { addPopout, removePopout, togglePopout } from '../../actions/index';
-import { RegisterPopoutContext } from '../../MagicMirror';
 
 import './Module.css'
 
-const mapStateToProps = (state, props) => {
-  const popout = state.popouts.find(popout => {
-    return popout.id === props.name
-  })
-  if(popout){
-    return {
-      top: popout.top,
-      left: popout.left,
-      isVisible: popout.isVisible
-    }
-  } else {
-    return {}
-  }
-}
-
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-    onModuleClick: () => {
-      dispatch(togglePopout(props.name))
-    },
-    addPopout: () => {
-      dispatch(addPopout(props.name, props.popoutHeight, props.popoutWidth))
-    },
-    removePopout: () => {
-      dispatch(removePopout(props.name))
-    },
-  }
-}
 
 class Module extends React.Component {
 
@@ -48,30 +17,44 @@ class Module extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      showingPopoutView: this.props.isShowing
+      showingPopoutView: false
     }
   }
 
-  componentDidMount() {
-    if(this.props.popoutView) {
-      this.props.addPopout();
+  togglePopoutView = () => {
+    const showingPopoutView = !this.state.showingPopoutView;
+    this.setState({ showingPopoutView });
+  }
+
+  getStyles = () => {
+    const { popoutHeight, popoutWidth } = this.props;
+    const { x, y } = this.popoutCenterPosition();
+    return {
+      position: 'absolute',
+      height: popoutHeight,
+      width: popoutWidth,
+      left: x,
+      top: y
     }
   }
 
-  componentWillUnmount() {
-    if(this.props.popoutView) {
-      this.props.removePopout();
-    }
+  popoutCenterPosition = () => {
+    const { popoutHeight, popoutWidth } = this.props;
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    const x = (screenWidth / 2) - (popoutWidth / 2);
+    const y = (screenHeight / 2) - (popoutHeight / 2);
+    return { x, y }
   }
+
+  
 
   render() {
-    const popout = this.props.isVisible && this.props.popoutView ? (
+    const Popout = this.state.showingPopoutView && this.props.popoutView ? (
       <DraggablePopout
         id={this.props.name}
-        left={this.props.left}
-        top={this.props.top}
-        height={this.props.popoutHeight}
-        width={this.props.popoutWidth}
+        styles={this.getStyles()}
       >
         {this.props.popoutView}
       </DraggablePopout>
@@ -83,21 +66,15 @@ class Module extends React.Component {
         name={this.props.name}
       >
         <div 
-          onClick={this.props.onModuleClick} 
+          onClick={this.togglePopoutView} 
           className='module'
         >
           {this.props.children}
         </div>
-        {popout}
-        <RegisterPopoutContext.Consumer>
-          {register => register(popout)}
-        </RegisterPopoutContext.Consumer>
+        {Popout}
       </div>
     )
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Module)
+export default Module;

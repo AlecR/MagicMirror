@@ -47,7 +47,6 @@ export default class ToDo extends Component {
   componentDidMount() {
     if(this.state.authorized) {
       ToDoHelper.getToDoData(data => {
-        console.log(data.tasks);
         this.setState({ 
           projects: data.projects,
           tasks: data.tasks
@@ -65,7 +64,6 @@ export default class ToDo extends Component {
         tasks[i].completed = !tasks[i].completed;
         if (tasks[i].completed) {
           timeouts[task.id] = setTimeout(() => {
-            console.log(`CLOSING ${task.id}`);
             ToDoHelper.closeTask(task.id, response => {
               console.log(response);
             });

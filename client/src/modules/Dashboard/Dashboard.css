@@ -2,8 +2,8 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  margin: 0 30px;
   height: 100%;
+  width: 100%;
 }
 
 .dashboard-row {
