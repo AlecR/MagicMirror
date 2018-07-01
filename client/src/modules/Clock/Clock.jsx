@@ -83,7 +83,6 @@ class Clock extends React.Component {
     }).sort((eventOne, eventTwo) => {
       return eventOne.start > eventTwo.start;
     })
-    console.log(eventsToday);
     return (
       <Module 
         name='clock'

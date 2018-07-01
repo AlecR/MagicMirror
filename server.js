@@ -1,6 +1,7 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const spawn = require('child_process').spawn;
 const fs = require('fs');
 
@@ -10,6 +11,12 @@ const WEATHER_API_KEY = '211442508a4f74ccbc238952adc10e13';
 const GOOGLE_CALENDAR_API_KEY = 'AIzaSyCdSizt6KqOy3_t_HwUk93fsKOR6Nt1rX0';
 const HUE_IP = '10.0.0.153'
 const HUE_USERNAME = 'cATamjW4q-RKFR0NxTZPMxU4fBaFST3DCf9lga1S';
+
+const TODOIST_CLIENT_ID = '4ddd8c32dc914bc7b5f5ef4b4f8637b3';
+const TODOIST_CLIENT_SECRET = 'ae06fdc4a4084f96986b836fd615632c';
+const TODOIST_REDIRECT_URI = 'http://localhost:3000/';
+
+const SECRETS_FILE = './secrets.json';
 
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
@@ -26,6 +33,7 @@ app.use(function (req, res, next) {
 });
 
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.get('/api/modules/index', (req, res) => {
     const indexProcess = spawn('python', ['./index_modules.py']);
@@ -54,8 +62,7 @@ app.get('/api/calendar/', (req, res) => {
     fetch(requestURL).then(response => {
         return response.json();
     }).then(json => {
-        const eventData = parseCalendarData(json)
-        console.log(eventData);
+        const eventData = parseCalendarData(json);
         res.json(eventData);
     });
 })
@@ -64,11 +71,11 @@ app.post('/api/mirror/config', (req, res) => {
     const moduleData = JSON.stringify(req.body);
     fs.writeFile('./client/src/config.json', moduleData, (err) => {
         if(err) {
-          res.sendStatus(500);
+            res.sendStatus(500);
         } else {
-          res.sendStatus(200);
+            res.sendStatus(200);
         }
-      })
+    })
 })
 
 app.get('/api/smartlights/groups', (req, res) => {
@@ -151,7 +158,74 @@ app.get('/api/smartlights/lights/:id/:on', (req, res) => {
     }).then(json => {
         res.json(json);
     })
-}) 
+})
+
+app.get('/api/todo/auth', (req, res) => {
+    const code = req.query.code;
+    const secret = req.query.state;
+    if(!code || !secret) res.sendStatus(500).send('Code or secret not provided');
+    if(secret !== TODOIST_CLIENT_SECRET) res.sendStatus(500).send('Provided secret does not match app secret');
+    const requestURL = `https://todoist.com/oauth/access_token?client_id=${TODOIST_CLIENT_ID}&client_secret=${secret}&code=${code}&redirect_uri=${TODOIST_REDIRECT_URI}`;
+    fetch(requestURL, {
+        method: "POST",
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        res.json(json);
+    }).catch(err => {
+        console.log(err);
+        res.sendStatus(500)
+    })
+})
+
+app.get('/api/todo/tasks', (req, res) => {
+    const token = req.cookies['todoist_token'];
+    const requestURL = 'https://beta.todoist.com/API/v8/tasks'
+    fetch(requestURL, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        res.json(json);
+    }).catch(err => {
+        console.log(err);
+        res.sendStatus(500)
+    })
+})
+
+app.get('/api/todo/tasks/:id/close', (req, res) => {
+    const token = req.cookies['todoist_token'];
+    const id = req.params.id;
+    const requestURL = `https://beta.todoist.com/API/v8/tasks/${id}/close`
+    fetch(requestURL, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    }).catch(err => {
+        console.log(err);
+        res.sendStatus(500)
+    })
+})
+
+app.get('/api/todo/projects', (req, res) => {
+    const token = req.cookies['todoist_token'];
+    const requestURL = 'https://beta.todoist.com/API/v8/projects'
+    fetch(requestURL, {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    }).then(response => {
+        return response.json();
+    }).then(json => {
+        res.json(json);
+    }).catch(err => {
+        console.log(err);
+        res.sendStatus(500)
+    })
+})
 
 const parseCalendarData = json => {
     const events = json.items.map(event => {

@@ -1,0 +1,74 @@
+/** Add custom module styles here */
+
+.todo-list {
+  height: 100%;
+  width: 100%;
+}
+
+.todo-list caption {
+  text-align: center;
+  font-size: 25px;
+  font-weight: lighter;
+}
+
+.todo-list table {
+  float: right;
+  max-width: 500px;
+}
+
+.todo-row {
+  width: 100%;
+}
+
+.grid-button:before { 
+  content: ' ';
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.grid-button {
+  height: 100%;
+}
+
+.grid-button img {
+  vertical-align: middle;
+  height: 50px;
+  max-width: 50px;
+}
+
+.grid-title {
+  font-weight: lighter;
+  font-size: 20px; 
+}
+
+.grid-project { 
+  text-align: right;
+}
+
+.todo-row-wrapper {
+  width: 100%;
+  display: grid;
+  grid-column-gap: 10px;
+  grid-template-columns: 9fr 1fr;
+  padding: 10px 0;
+  border-top: 1px solid white; 
+}
+
+.todo-row:last-child>td {
+  border-bottom: 1px solid white;
+}
+
+
+.todo-row-left {
+  display: grid;
+  grid-template-rows: fit-content(auto);
+  grid-row-gap: 15px;
+}
+
+.todo-row-footer {
+  display: grid;
+  font-size: 15px;
+  grid-template-columns: 2fr 1fr;
+}
+
