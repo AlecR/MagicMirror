@@ -58,8 +58,8 @@ export default class $POPOUT_NAME extends Component {
 EOL
 
 echo "Generating $MODULE_NAME.css"
-cat >$POPOUT_NAME.css <<EOL
-# Add custom module styles here
+cat >$MODULE_NAME.css <<EOL
+/* Add custom module styles here */
 EOL
 
 
