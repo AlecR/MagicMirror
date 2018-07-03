@@ -13,15 +13,14 @@ cat >config.json <<EOL
 {
   "name": "$MODULE_NAME",
   "description": "Add your module description here",
-  "componentFile": "$MODULE_NAME.jsx",
   "position": null
 }
 EOL
 
-echo "Generating $MODULE_NAME.jsx"
-cat >$MODULE_NAME.jsx <<EOL
+echo "Generating index.jsx"
+cat >index.jsx <<EOL
 import React, { Component } from 'react';
-import Module from '../Module/Module';
+import Module from 'core/Module';
 import $POPOUT_NAME from './$POPOUT_NAME'
 import './$MODULE_NAME.css';
 

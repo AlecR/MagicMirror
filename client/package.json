@@ -2,7 +2,7 @@
   "name": "magic-mirror",
   "version": "0.1.0",
   "private": true,
-  "main": "src/electron.js",
+  "main": "./electron.js",
   "dependencies": {
     "concurrently": "^3.5.1",
     "electron": "^2.0.3",

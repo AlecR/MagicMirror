@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Dashboard from './modules/Dashboard/Dashboard';
-import ModuleIndex from './config.json';
-import { refreshIndex } from './lib/ModuleIndex';
+import Dashboard from 'core/Dashboard';
+import ModuleIndex from 'config.json';
+import { refreshIndex } from 'lib/ModuleIndex';
 
-class MagicMirror extends Component {
+export default class MagicMirror extends Component {
 
   state = {
     mirrorModules: [
@@ -18,7 +18,8 @@ class MagicMirror extends Component {
     const mirrorModules = [...this.state.mirrorModules];
     this.state.moduleIndex.forEach(module => {
       if(module.position !== null) {
-        mirrorModules[module.position] = require(`${module.componentFile}`).default
+        console.log(`modules/${module.name}`);
+        mirrorModules[module.position] = require(`modules/${module.name}`).default
       }
     })
     this.setState({ mirrorModules })
@@ -39,5 +40,3 @@ class MagicMirror extends Component {
     )
   }
 }
-
-export default MagicMirror;

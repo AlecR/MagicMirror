@@ -1,7 +1,7 @@
 import React from 'react';
 import WeatherHelper from './WeatherHelper.js';
 import WeatherIcons from 'react-weathericons';
-import Module from '../Module/Module.jsx';
+import Module from 'core/Module';
 import WeatherPopout from './WeatherPopout';
 import 'weathericons/css/weather-icons.css';
 import './Weather.css';

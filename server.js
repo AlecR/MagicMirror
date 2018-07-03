@@ -16,8 +16,6 @@ const TODOIST_CLIENT_ID = '4ddd8c32dc914bc7b5f5ef4b4f8637b3';
 const TODOIST_CLIENT_SECRET = 'ae06fdc4a4084f96986b836fd615632c';
 const TODOIST_REDIRECT_URI = 'http://localhost:3000/';
 
-const SECRETS_FILE = './secrets.json';
-
 app.use(function (req, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');

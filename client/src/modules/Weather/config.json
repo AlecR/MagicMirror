@@ -1,5 +1,4 @@
 {
   "name": "Weather",
-  "description": "A module for displaying the weather",
-  "componentFile": "Weather.jsx"
+  "description": "A module for displaying the weather"
 }

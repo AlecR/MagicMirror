@@ -1,6 +1,6 @@
 import React from 'react';
 import './Clock.css';
-import Module from '../Module/Module.jsx';
+import Module from 'core/Module';
 import ClockPopout from './ClockPopout';
 import CalendarHelper from './CalendarHelper.js';
 import EventsToday from './EventsToday';

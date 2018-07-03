@@ -1,6 +1,5 @@
 {
   "name": "SmartLights",
   "description": "Module for controlling Philips Hue lights",
-  "componentFile": "SmartLights.jsx",
   "position": null
 }

@@ -2,8 +2,8 @@ import os
 import json
 import sys
 
-ignore_files = ['.DS_Store', 'Module', 'Dashboard', 'Popout', 'MagicMirror']
-required_config_fields = ['name', 'description', 'componentFile']
+ignore_files = ['.DS_Store']
+required_config_fields = ['name', 'description']
 
 module_config_file = 'config.json'
 mirror_config_file = './client/src/config.json'
@@ -39,10 +39,6 @@ def index_modules():
                         warnings.append("WARNING: [%s] '%s' is a required field in config.json. Cannot load module." % (module, field))
                         config_has_erros = True
                         continue
-
-                    if field == 'componentFile':
-                        component_path = './modules/' + module_info['name'] + '/' + module_info['componentFile']
-                        module_data[field] = component_path
                     else:
                         module_data[field] = module_info[field]
                 module_data['position'] = None       

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Module from '../Module/Module';
+import Module from 'core/Module';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ToDoPopout from './ToDoPopout';
 import ToDoHelper from './ToDoHelper';

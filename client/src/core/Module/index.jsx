@@ -1,18 +1,10 @@
 import React from 'react';
-import DraggablePopout from '../Popout/DraggablePopout';
-import PropTypes from 'prop-types';
+import DraggablePopout from 'core/Popout';
 
 import './Module.css'
 
 
 class Module extends React.Component {
-
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    popoutView: PropTypes.object,
-    popoutHeight: PropTypes.number,
-    popoutWidth: PropTypes.number,
-  }
 
   constructor(props) {
     super(props)

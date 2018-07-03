@@ -1,3 +1,4 @@
+const dotenv = require('dotenv').config();
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;

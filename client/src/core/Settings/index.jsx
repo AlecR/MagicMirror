@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
-import Module from '../Module/Module';
+import Module from 'core/Module';
 import SettingsPopout from './SettingsPopout';
 import './Settings.css';
 import moduleData from './../../config.json';

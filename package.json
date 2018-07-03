@@ -6,7 +6,8 @@
   "scripts": {
     "client": "cd client && npm run electron-dev",
     "server": "node server.js",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "postinstall": "cd client && npm install"
   },
   "author": "",
   "license": "ISC",

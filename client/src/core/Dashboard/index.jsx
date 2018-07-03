@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Settings from 'core/Settings';
 import './Dashboard.css';
 
 export default class Dashboard extends Component { 
@@ -56,10 +57,11 @@ export default class Dashboard extends Component {
             {modules[11]}
           </div>
           <div className='module-container'>
-            {modules[12]}
+          <Settings />
           </div>
         </section>
       </div>
+      
     )
   }
 }

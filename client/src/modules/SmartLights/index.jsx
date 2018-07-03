@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Module from '../Module/Module';
+import Module from 'core/Module';
 import SmartLightsHelper from './SmartLightsHelper';
 import Room from './Room';
-
 import './SmartLights.css';
 
 export default class SmartLights extends Component {
