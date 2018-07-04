@@ -18,8 +18,9 @@ const Room = (props) => (
                 name={light.name}
                 lightId={light.lightId}
                 on={light.on}
+                brightness={light.brightness}
                 onLightClick={props.onLightClick}
-                updateBrightness={this.updateBrightness}
+                updateBrightness={props.updateBrightness}
               />
             )
           }
