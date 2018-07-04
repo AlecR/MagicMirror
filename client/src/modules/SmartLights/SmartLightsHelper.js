@@ -13,9 +13,24 @@ const getAllLights = (callback) => {
   fetchGet(requestURL, callback);
 }
 
-const toggleLight = (id, on, callback) => {
-  const requestURL = `http://localhost:3001/api/smartlights/lights/${id}/${on}`;
-  fetchGet(requestURL, callback);
+const updateState = (id, body, callback) => {
+  const requestURL = `http://localhost:3001/api/smartlights/lights/${id}/state`;
+  const requestBody = JSON.stringify(body);
+  fetch(requestURL, {
+    method: "PUT",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: requestBody
+  }).then(response => {
+    return response.json();
+  }).then(json => {
+    callback(json);
+  }).catch(error =>{
+    console.log(`[ERROR]: ${requestURL}`);
+    console.log(error);
+  })
 }
 
 const fetchGet = (url, callback) => {
@@ -29,4 +44,4 @@ const fetchGet = (url, callback) => {
   })
 }
 
-export default { getRooms, getLight, getAllLights, toggleLight }
+export default { getRooms, getLight, getAllLights, updateState }

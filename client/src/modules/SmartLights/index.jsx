@@ -25,27 +25,29 @@ export default class SmartLights extends Component {
     })
   };
 
-  toggleLightState = (id) => {
-    const lights = this.state.lights;
-    lights[id].on = !lights[id].on;
-    this.setState({lights});
-  };
-
   toggleLight = (id, on) => {
-    SmartLightsHelper.toggleLight(id, on, response => {
+    const body = {'on':on}
+    SmartLightsHelper.updateState(id, body, response => {
       if(response.length > 0 && response[0].success){
-        this.toggleLightState(id);
+        const lights = this.state.lights;
+        lights[id].on = !lights[id].on;
+        this.setState({lights});
       }
     });
   };
 
   updateBrightness = (id, brightness) => {
-    const lights = this.state.lights;
-    lights[id].brightness = brightness;
-    this.setState({ lights })
-  }
+    const body = {'bri': brightness};
+    SmartLightsHelper.updateState(id, body, response => {
+      if(response.length > 0 && response[0].success){
+        const lights = this.state.lights;
+        lights[id].brightness = brightness;
+        this.setState({lights});
+      }
+    });
+  };
 
-  render() {    
+  render() {
     return(
       <Module
         name='SmartLights'

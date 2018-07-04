@@ -20,7 +20,7 @@ app.use(function (req, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET');
+    res.setHeader('Access-Control-Allow-Methods', ['GET', 'PUT']);
     // Request headers you wish to allow
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     // Set to true if you need the website to include cookies in the requests sent
@@ -143,14 +143,12 @@ app.get('/api/smartlights/lights/:id', (req, res) => {
      })
 })
 
-app.get('/api/smartlights/lights/:id/:on', (req, res) => {
-    const state = req.params.on
-    const body = {"on":(state === 'true')}
+app.put('/api/smartlights/lights/:id/state', (req, res) => {
     const id = req.params.id;
     const requestURL = `http://${HUE_IP}/api/${HUE_USERNAME}/lights/${id}/state`;
     fetch(requestURL, {
         method: "PUT",
-        body: JSON.stringify(body)
+        body: JSON.stringify(req.body)
     }).then(response => {
         return response.json();
     }).then(json => {

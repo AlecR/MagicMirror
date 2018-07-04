@@ -27,16 +27,13 @@
 }
 
 .smart-light-button {
+  position: relative;
   height: 90%;
   width: 90%;
   display: block;
   margin: 0 auto;
-  border: 2px white solid;
+  border: 3px white solid;
   border-radius: 10px;
-}
-
-.on {
-  background-color: white;
 }
 
 /*********************************/
