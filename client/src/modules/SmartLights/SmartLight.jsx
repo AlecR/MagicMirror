@@ -25,7 +25,7 @@ const getStyles = (props) => {
 
 const brightnessDragHandler = (event, props) => {
   if(event.clientY !== 0) {
-    dragDistance = event.clientY - dragStartPos;
+    dragDistance = event.touches[0].clientY - dragStartPos;
   }
   var newBrightness = props.brightness - (dragDistance / 2);
   if(newBrightness < 0) {
@@ -49,7 +49,8 @@ const SmartLight = (props) => (
       className={'smart-light-button '}
       onClick={() => props.onLightClick(props.lightId, !props.on)}
       draggable={true}
-      onDrag={(event) => {
+      onTouchMove={(event) => {
+        console.log("MOVE");
         const currentTime = new Date().getTime();
         if(!lastRequest || currentTime - lastRequest > 100) {
           lastRequest = currentTime;
@@ -57,11 +58,13 @@ const SmartLight = (props) => (
         }
         
       }}
-      onDragStart={(event) => {
-        dragStartPos = event.clientY;
-        event.dataTransfer.setDragImage(dragPreview(), 0, 0)
+      onTouchStart={(event) => {
+        console.log("START");
+        dragStartPos = event.touches[0].clientY;
+        //event.dataTransfer.setDragImage(dragPreview(), 0, 0)
       }}
-      onDragEnd={(event) => {
+      onTouchEnd={(event) => {
+        console.log("END")
         lastRequest = null;
         dragStartPos = null;
       }}
