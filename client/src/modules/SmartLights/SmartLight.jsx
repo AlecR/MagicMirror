@@ -8,11 +8,8 @@ const dragPreview = () => {
 }
 
 const getStyles = (props) => {
-  var top = "100%";
-  if(props.on) {
-    const brightnessPercent = parseInt(((props.brightness/254)*100), 10)
-    top = `${100 - brightnessPercent}%`
-  }
+  const brightnessPercent = parseInt(((props.brightness/254)*100), 10)
+  const top = `${100 - brightnessPercent}%`
   return {
     top: top,
     backgroundColor: 'white',
@@ -44,7 +41,7 @@ const SmartLight = (props) => (
   >
     <div className='smart-light-name'>{props.name}</div>
     <div 
-      className={'smart-light-button '}
+      className={'smart-light-button ' + (props.on ? '' : 'on')}
       onClick={() => props.onLightClick(props.lightId, !props.on)}
       draggable={true}
       onTouchMove={(event) => {
