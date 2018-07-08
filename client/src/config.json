@@ -1,18 +1,4 @@
-[{
-  "position": 5,
-  "name": "SmartLights",
-  "description": "Module for controlling Philips Hue lights"
-}, {
-  "position": 7,
-  "name": "ToDo",
-  "description": "Add your module description here"
-}, {
-  "position": 2,
-  "name": "Weather",
-  "description": "A module for displaying the weather"
-}, {
-  "position": 4,
-  "name": "Clock",
-  "description": "A module for displaying the time and date"
-}]
-
+{
+  "setupComplete": false,
+  "modules": []
+}
