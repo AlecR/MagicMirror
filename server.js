@@ -67,6 +67,7 @@ app.get('/api/calendar/', (req, res) => {
 
 app.post('/api/mirror/config', (req, res) => {
     const moduleData = JSON.stringify(req.body);
+    console.log(moduleData);
     fs.writeFile('./client/src/config.json', moduleData, (err) => {
         if(err) {
             res.sendStatus(500);

@@ -8,16 +8,16 @@
 
 .settings-popout {
   border: 1px solid white;
-  width: 100%;
-  display: grid;
-  grid-template-rows: 1fr 9fr;
   background-color: black;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .settings-popout-body {
-  display: grid;
-  grid-template-columns: 6fr 4fr;
   padding: 20px;
+  flex: 1;
 }
 
 .settings-popout-header p {
@@ -32,130 +32,3 @@
 }
 
 
-/* ============================================== */
-/* =========== SETTINGS MIRROR LAYOUT =========== */
-/* ============================================== */
-
-.active-mirror-module {
-  background-color: darkred;
-}
-
-.mirror-layout {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  margin: 0 30px;
-}
-
-.settings-layout-row {
-  display: flex;
-  flex-direction: row;
-  flex: 25;
-}
-
-.settings-layout-row-sm {
-  flex: 5;
-}
-
-.settings-module-container {
-  flex: 1;
-  border: 1px solid white;
-  font-size: 20px;
-  font-weight: lighter;
-}
-
-.settings-module-name {
-  height: 100%;
-  margin: 0;
-  font-size: 20px;
-  vertical-align: middle;
-  justify-content: center;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  text-align: center;
-}
-
-/* ==================================== */
-/* ========== SETTINGS TABLE ========== */
-/* ==================================== */
-
-.settings-table-wrapper {
-  display: grid;
-}
-
-.active-table-module {
-  float: right;
-  font-size: 15px;
-  margin-top: 5px;
-  margin-right: 5px;
-  padding: 2px;
-  border-radius: 5px;
-  border: 1px solid white;
-}
-
-.edit-mode-box {
-  display: none;
-}
-
-.settings-table {
-  grid-row-start: 1;
-  grid-row-end: 9;
-  border-spacing: 0 20px;
-  width: 100%;
-  overflow: scroll;
-}
-
-.settings-table caption {
-  font-size: 25px;
-  font-weight: lighter;
-}
-
-.module-header {
-  margin: 0 0 5px 10px;
-  font-weight: bolder;
-  font-size: 25px;
-}
-
-.module-description {
-  margin: 0 10px;
-  font-weight: lighter;
-  font-size: 20px;
-}
-
-.settings-table-footer {
-  grid-row-start: 9;
-  grid-row-end: 10;
-}
-
-.settings-table-footer button {
-  border: none;
-  color: white;
-  background-color: black;
-  height: 50px;
-  width: 200px;
-  font-size: 25px;
-  display: block;
-  margin: 50px auto 0 auto;
-  outline: none;
-  font-weight: lighter;
-}
-
-.settings-table-footer button:active {
-  color: gray;
-}
-
-.settings-row {
-  display: block;
-  width: 100%;
-  padding: 20px 0;
-}
-
-.settings-row td {
-  display: block;
-  width: 100%;
-}
-
-.selected {
-  background-color: darkred;
-}

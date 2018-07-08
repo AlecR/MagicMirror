@@ -41,7 +41,7 @@ const SmartLight = (props) => (
   >
     <div className='smart-light-name'>{props.name}</div>
     <div 
-      className={'smart-light-button ' + (props.on ? '' : 'on')}
+      className={'smart-light-button ' + (props.on ? '' : 'off')}
       onClick={() => props.onLightClick(props.lightId, !props.on)}
       draggable={true}
       onTouchMove={(event) => {

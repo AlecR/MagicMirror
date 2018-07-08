@@ -9,7 +9,7 @@ const authorizeUser = (query) => {
     if(token.error || !token.access_token) return;
     const accessToken = token.access_token;
     document.cookie = `${cookieName}=${accessToken};path=/`;
-    window.location.href = "http://localhost:3000/"
+    window.location.href = "http://localhost:3000/dashboard"
   }).catch(err => {
     console.log(err);
   })

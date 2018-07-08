@@ -1,22 +1,20 @@
 import React, { Component } from 'react';
 import Module from 'core/Module';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import ToDoPopout from './ToDoPopout';
 import ToDoHelper from './ToDoHelper';
 import ToDoList from './ToDoList';
 import './ToDo.css';
 
 const AuthRouter = () => (
-  <Router>
-    <Route 
-      path='/todo/auth'
-      render={() => {
-        const query = window.location.search;
-        ToDoHelper.authorizeUser(query);
-        return null
-      }}
-    />
-  </Router>
+  <Route 
+    path='/dashboard/auth/todo'
+    render={() => {
+      const query = window.location.search;
+      ToDoHelper.authorizeUser(query);
+      return null;
+    }}
+  />
 )
 
 const UnauthorizedScreen = () => (

@@ -1,5 +1,6 @@
 const dotenv = require('dotenv').config();
 const electron = require('electron');
+const mirrorConfig = require('./src/config.json');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
@@ -11,7 +12,8 @@ let mainWindow;
 function createWindow() {
   process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
   mainWindow = new BrowserWindow({width: 900, height: 680});
-  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
+  const url = mirrorConfig.setupComplete ? 'http://localhost:3000/dashboard' : 'http://localhost:3000/onboarding/welcome'
+  mainWindow.loadURL(isDev ? url : `file://${path.join(__dirname, '../build/index.html')}`);
   mainWindow.on('closed', () => mainWindow = null);
 }
 

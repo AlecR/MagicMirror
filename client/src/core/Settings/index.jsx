@@ -3,11 +3,9 @@ import FontAwesome from 'react-fontawesome';
 import Module from 'core/Module';
 import SettingsPopout from './SettingsPopout';
 import './Settings.css';
-import moduleData from './../../config.json';
 
 export default class Settings extends Component {
   state = {
-    modules: moduleData,
     editMode: false,
     selectedTableModuleName: null,
     selectedMirrorPosition: null,
@@ -73,15 +71,7 @@ export default class Settings extends Component {
         name='settings'
         popoutHeight={600}
         popoutWidth={1200}
-        popoutView={<SettingsPopout 
-          moduleData={this.state.modules}
-          editMode={this.state.editMode}
-          selectedTableModuleName={this.state.selectedTableModuleName}
-          selectedMirrorPosition={this.state.selectedMirrorPosition}
-          onTableModuleClick={this.updateSelectedTableModule}
-          onMirrorModuleClick={this.updateSelectedMirrorPosition}
-          onApplyClick={this.saveUpdatedConfig}
-        />}
+        popoutView={<SettingsPopout />}
       >
         <div className='settings'> 
           <FontAwesome

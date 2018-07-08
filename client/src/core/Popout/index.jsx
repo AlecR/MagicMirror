@@ -3,7 +3,6 @@ import Draggable from 'react-draggable';
 
 export default class DraggablePopout extends Component {
   render() {
-    console.log(this.props.position);
     return (
       <Draggable>
         <div style={this.props.styles}>

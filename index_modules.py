@@ -53,8 +53,12 @@ def index_modules():
     return indexed_modules
 
 def save_modules_to_config(modules):
-    with open(mirror_config_file, 'w') as config_file:
-        json.dump(modules, config_file)
+    with open(mirror_config_file, 'r+') as config_file:
+        current_config = json.load(config_file)
+        current_config['modules'] = modules
+        config_file.seek(0)
+        json.dump(current_config, config_file)
+        config_file.truncate()
 
 def file_is_empty(file):
     return os.path.getsize(file) <= 0
@@ -70,7 +74,7 @@ def update_config_file():
 
     with open(mirror_config_file) as current_mirror_config:
         current_mirror_config = json.load(current_mirror_config)
-        for module in current_mirror_config:
+        for module in current_mirror_config['modules']:
             config_modules.append(module)
 
     if len(config_modules) < 1:
@@ -83,7 +87,7 @@ def update_config_file():
             module['position'] = config_modules[module_index]['position']
         else:
             module['position'] = None
-        
+
     save_modules_to_config(indexed_modules)
 
     # NOTE: Warnings are printed to be added to the buffer. The buffer is the

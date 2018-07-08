@@ -1,0 +1,19 @@
+.mirror-configuration {
+  height: 100%;
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+.mirror-configuration-grid {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.mirror-configuration-table {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+}

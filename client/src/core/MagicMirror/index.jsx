@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import Setup from 'core/Onboarding/Setup';
+import LaunchScreen from 'core/Onboarding/LaunchScreen';
 import Dashboard from 'core/Dashboard';
-import ModuleIndex from 'config.json';
+import MirrorConfig from 'config.json';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { refreshIndex } from 'lib/ModuleIndex';
+import './MagicMirror.css'
 
 export default class MagicMirror extends Component {
 
@@ -10,19 +14,19 @@ export default class MagicMirror extends Component {
       null, null, null, null, null, null,
       null, null, null, null, null, null,
     ],
-    moduleIndex: ModuleIndex
+    moduleIndex: MirrorConfig.modules
   }
 
   componentWillMount() {
+    console.log(MirrorConfig.modules);
     refreshIndex()
     const mirrorModules = [...this.state.mirrorModules];
     this.state.moduleIndex.forEach(module => {
       if(module.position !== null) {
-        console.log(`modules/${module.name}`);
         mirrorModules[module.position] = require(`modules/${module.name}`).default
       }
     })
-    this.setState({ mirrorModules })
+    this.setState({ mirrorModules });
   }
 
   render() {
@@ -33,9 +37,17 @@ export default class MagicMirror extends Component {
           width: '100%'
         }}
       > 
-        <Dashboard 
-          modules={this.state.mirrorModules}
-        />
+        <BrowserRouter>
+          <div className='routes'>
+            <Route path='/dashboard' render={() => (
+              <Dashboard 
+                modules={this.state.mirrorModules}
+              />
+            )} />
+            <Route path='/onboarding/welcome' component={LaunchScreen} />
+            <Route path='/onboarding/setup' component={Setup} />
+          </div>
+        </BrowserRouter>
       </div>
     )
   }

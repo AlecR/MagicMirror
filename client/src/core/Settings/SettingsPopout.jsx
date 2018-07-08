@@ -1,6 +1,5 @@
 import React from 'react';
-import SettingsMirrorLayout from './SettingsMirrorLayout';
-import SettingsModuleTable from './SettingsModuleTable';
+import MirrorConfiguration from 'core/shared/MirrorConfiguration';
 
 const SettingsPopout = (props) =>  (
   <div className='settings-popout'>
@@ -8,18 +7,11 @@ const SettingsPopout = (props) =>  (
       <p className='settings-popout-title'>Settings</p>
     </div>
     <div className='settings-popout-body'>
-      <SettingsMirrorLayout 
-        modules={props.moduleData}
-        selectedMirrorPosition={props.selectedMirrorPosition}
-        onModuleClick={props.onMirrorModuleClick}
-      />
-      <SettingsModuleTable
-        modules={props.moduleData}
-        editMode={props.editMode}
-        selectedMirrorPosition={props.selectedMirrorPosition}
-        selectedTableModuleName={props.selectedTableModuleName}
-        onModuleClick={props.onTableModuleClick}
-        onApplyClick={props.onApplyClick}
+      <MirrorConfiguration
+        horizontal={true} 
+        onSaveSuccess={() => {
+          window.location = "http://localhost:3000/dashboard";
+        }}
       />
     </div>
   </div>
