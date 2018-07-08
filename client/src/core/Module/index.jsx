@@ -23,6 +23,7 @@ class Module extends React.Component {
     const { x, y } = this.popoutCenterPosition();
     return {
       position: 'absolute',
+      zIndex: 100,
       height: popoutHeight,
       width: popoutWidth,
       left: x,

@@ -83,7 +83,7 @@ export default class ToDo extends Component {
         name='ToDo'
         popoutHeight={500} // Change this to adjust the height of your popout
         popoutWidth={500}  // Change this to adjust the width of your popout
-        popoutView={<ToDoPopout />}
+        popoutView={null}
       >
         {this.state.authorized ? (
           <ToDoList 

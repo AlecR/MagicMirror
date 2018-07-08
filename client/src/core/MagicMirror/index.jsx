@@ -18,7 +18,6 @@ export default class MagicMirror extends Component {
   }
 
   componentWillMount() {
-    console.log(MirrorConfig.modules);
     refreshIndex()
     const mirrorModules = [...this.state.mirrorModules];
     this.state.moduleIndex.forEach(module => {

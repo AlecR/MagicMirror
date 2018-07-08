@@ -92,7 +92,7 @@ def update_config_file():
 
     # NOTE: Warnings are printed to be added to the buffer. The buffer is the
     # return value for the child process in server.js
-    print index['warnings']
+    print(index['warnings'])
 
     sys.stdout.flush()
 
