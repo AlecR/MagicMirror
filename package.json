@@ -9,7 +9,7 @@
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "postinstall": "cd client && npm install"
   },
-  "author": "",
+  "author": "Alec Rodgers",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
