@@ -11,7 +11,7 @@ let mainWindow;
 
 function createWindow() {
   process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
-  mainWindow = new BrowserWindow({width: 900, height: 680});
+  mainWindow = new BrowserWindow({width: 1500, height: 1500});
   const url = mirrorConfig.setupComplete ? 'http://localhost:3000/dashboard' : 'http://localhost:3000/onboarding/welcome'
   mainWindow.loadURL(isDev ? url : `file://${path.join(__dirname, '../build/index.html')}`);
   mainWindow.on('closed', () => mainWindow = null);

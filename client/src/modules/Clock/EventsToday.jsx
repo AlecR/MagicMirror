@@ -9,7 +9,6 @@ const EventsToday = (props) => (
       <tbody>
         {
           props.events.map(event => {
-            console.log(event);
             const startTime = CalendarHelper.convertDateToTime(new Date(event.start), true)
             const endTime = CalendarHelper.convertDateToTime(new Date(event.end), true)
             return (

@@ -1,20 +1,22 @@
+import { SERVER_URL } from 'lib/constants'; 
+
 const getRooms = (callback) => {
-  const requestURL = 'http://localhost:3001/api/smartlights/groups';
+  const requestURL = `${SERVER_URL}/api/smartlights/groups`;
   fetchGet(requestURL, callback);
 }
 
 const getLight = (id, callback) => {
-  const requestURL = `http://localhost:3001/api/smartlights/lights/${id}`;
+  const requestURL = `${SERVER_URL}/api/smartlights/lights/${id}`;
   fetchGet(requestURL, callback);
 }
 
 const getAllLights = (callback) => {
-  const requestURL = `http://localhost:3001/api/smartlights/lights`;
+  const requestURL = `${SERVER_URL}/api/smartlights/lights`;
   fetchGet(requestURL, callback);
 }
 
 const updateState = (id, body, callback) => {
-  const requestURL = `http://localhost:3001/api/smartlights/lights/${id}/state`;
+  const requestURL = `${SERVER_URL}/api/smartlights/lights/${id}/state`;
   const requestBody = JSON.stringify(body);
   fetch(requestURL, {
     method: "PUT",

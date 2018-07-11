@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import MirrorConfig from 'config.json';
 import MirrorGrid from 'core/shared/MirrorGrid';
 import ModuleTable from 'core/shared/ModuleTable';
+import { SERVER_URL } from 'lib/constants';
 import './MirrorConfiguration.css';
 
 export default class MirrorConfiguration extends Component {
@@ -45,7 +46,7 @@ export default class MirrorConfiguration extends Component {
   }
 
   saveUpdatedConfig = () => {
-    const requestURL = 'http://localhost:3001/api/mirror/config'
+    const requestURL = `${SERVER_URL}/api/mirror/config`
     const config = MirrorConfig
     config.modules = this.state.modules
     config.setupComplete = true

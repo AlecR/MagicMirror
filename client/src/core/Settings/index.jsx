@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FontAwesome from 'react-fontawesome';
 import Module from 'core/Module';
+import { SERVER_URL } from 'lib/constants';
 import SettingsPopout from './SettingsPopout';
 import './Settings.css';
 
@@ -53,7 +54,7 @@ export default class Settings extends Component {
   }
 
   saveUpdatedConfig = () => {
-    const requestURL = 'http://localhost:3001/api/mirror/config'
+    const requestURL = `${SERVER_URL}/api/mirror/config`
     fetch(requestURL, {
       method: 'POST',
       headers: {

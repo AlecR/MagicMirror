@@ -1,5 +1,7 @@
+import { SERVER_URL } from 'lib/constants';
+
 const refreshIndex = () => {
-  const requestURL = 'http://localhost:3001/api/modules/index'
+  const requestURL = `${SERVER_URL}/api/modules/index`
   fetch(requestURL).then(response => {
     return response.json();
   }).then(json => {

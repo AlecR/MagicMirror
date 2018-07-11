@@ -1,5 +1,7 @@
+import { SERVER_URL } from 'lib/constants';
+
 const getCalendarData = (callback) => {
-  const requestURL = 'http://localhost:3001/api/calendar'
+  const requestURL = `${SERVER_URL}/api/calendar`
   fetch(requestURL).then(response => {
     return response.json();
   }).then(json => {

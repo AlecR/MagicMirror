@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import Module from 'core/Module';
-import { BrowserRouter, Route } from 'react-router-dom';
-import ToDoPopout from './ToDoPopout';
+import { Route } from 'react-router-dom';
 import ToDoHelper from './ToDoHelper';
 import ToDoList from './ToDoList';
 import './ToDo.css';
 
 const AuthRouter = () => (
   <Route 
-    path='/dashboard/auth/todo'
+    path='/dashboard/todo/authenticate'
     render={() => {
       const query = window.location.search;
       ToDoHelper.authorizeUser(query);
@@ -35,22 +34,23 @@ const UnauthorizedScreen = () => (
 
 export default class ToDo extends Component {
 
+  
+
   state = {
-    authorized: ToDoHelper.isAuthorized(),
+    authorized: false,
     tasks: [],
     projects: {},
     timeouts: {}
   }
 
   componentDidMount() {
-    if(this.state.authorized) {
-      ToDoHelper.getToDoData(data => {
-        this.setState({ 
-          projects: data.projects,
-          tasks: data.tasks
-         })
-      })
-    }
+    ToDoHelper.isAuthorized(authorized => {
+      if (authorized) {
+        this.setState({ authorized });
+        this.fetchData();
+      }
+      
+    })
   }
 
   toggleTask = (event, task) => {
@@ -73,8 +73,16 @@ export default class ToDo extends Component {
         break;
       }
     }
-
     this.setState({ tasks, timeouts });
+  }
+
+  fetchData = () => {
+    ToDoHelper.getToDoData(data => {
+      this.setState({ 
+        projects: data.projects,
+        tasks: data.tasks
+       })
+    })
   }
 
   render() {

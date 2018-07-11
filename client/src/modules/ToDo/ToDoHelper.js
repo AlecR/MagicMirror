@@ -1,24 +1,46 @@
-const cookieName = 'todoist_token';
+import { SERVER_URL } from 'lib/constants';
 
 const authorizeUser = (query) => {
-  if(!query) return;
-  const requestURL = `http://localhost:3001/api/todo/auth${query}`;
-  fetch(requestURL).then(response => {
-    return response.json();
-  }).then(token => {
-    if(token.error || !token.access_token) return;
-    const accessToken = token.access_token;
-    document.cookie = `${cookieName}=${accessToken};path=/`;
-    window.location.href = "http://localhost:3000/dashboard"
+  if(!query) {
+    console.log('No query provided. Returning');
+    return;
+  }
+  const requestURL = `${SERVER_URL}/api/todo/auth${query}`;
+  fetch(requestURL, {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  }).then(_ => {
+    window.location.href = 'http://localhost:3000/dashboard'
   }).catch(err => {
     console.log(err);
   })
 }
 
-const getToDoProjects = (callback) => {
-  const requestURL = 'http://localhost:3001/api/todo/projects'
+const isAuthorized = (callback) => {
+  const requestURL = `${SERVER_URL}/api/todo/authorized`;
   fetch(requestURL, {
-    credentials: "include"
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include'
+  }).then(response => {
+    return response.json()
+  }).then(json => {
+    const authorized = json.authorized;
+    callback(authorized);
+  }).catch(err => {
+    console.log(err);
+    return;
+  })
+}
+
+const getToDoProjects = (callback) => {
+  const requestURL = `${SERVER_URL}/api/todo/projects`
+  fetch(requestURL, {
+    credentials: 'include'
   }).then(response => {
     return response.json()
   }).then(json => {
@@ -29,9 +51,9 @@ const getToDoProjects = (callback) => {
 }
 
 const getToDoTasks = (callback) => {
-  const requestURL = 'http://localhost:3001/api/todo/tasks'
+  const requestURL = `${SERVER_URL}/api/todo/tasks`
   fetch(requestURL, {
-    credentials: "include"
+    credentials: 'include', 
   }).then(response => {
     return response.json()
   }).then(json => {
@@ -60,9 +82,12 @@ const getToDoData = (callback) => {
 }
 
 const closeTask = (id, callback) => {
-  const requestURL = `http://localhost:3001/api/todo/tasks/${id}/close`;
+  const requestURL = `${SERVER_URL}/api/todo/tasks/${id}/close`;
   fetch(requestURL, {
-    credentials: "include"
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include'
   }).then(response => {
     return response.json()
   }).then(json => {
@@ -70,16 +95,6 @@ const closeTask = (id, callback) => {
   }).catch(err => {
     console.log(err);
   })
-}
-
-
-const isAuthorized = () => {
-  return getCookieValue(cookieName) != null;
-}
-
-function getCookieValue(name) {
-  var cookie = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-  return cookie ? cookie.pop() : null;
 }
 
 export default { authorizeUser, isAuthorized, getToDoData, closeTask }
