@@ -1,4 +1,6 @@
 import { SERVER_URL } from 'lib/constants';
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 const authorizeUser = (query) => {
   if(!query) {
@@ -13,7 +15,7 @@ const authorizeUser = (query) => {
     },
     credentials: 'include',
   }).then(_ => {
-    window.location.href = 'http://localhost:3000/dashboard'
+    return <Redirect to="/dashboard"/>
   }).catch(err => {
     console.log(err);
   })

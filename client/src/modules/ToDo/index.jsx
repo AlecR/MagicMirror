@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Module from 'core/Module';
 import { Route } from 'react-router-dom';
-import ToDoHelper from './ToDoHelper';
+import ToDoHelper from './ToDoHelper.jsx';
 import ToDoList from './ToDoList';
 import './ToDo.css';
 

@@ -3,8 +3,53 @@ import WeatherHelper from './WeatherHelper.js';
 import WeatherIcons from 'react-weathericons';
 import Module from 'core/Module';
 import WeatherPopout from './WeatherPopout';
+import Spinner from 'react-spinkit';
 import 'weathericons/css/weather-icons.css';
 import './Weather.css';
+
+const Loading = () => (
+  <div className='loading'>
+    <Spinner 
+      className='weather-loading-spinner'
+      name='three-bounce'
+      color='white' 
+    />
+    <p className='weather-loading-title'>Loading Weather...</p>
+  </div>
+)
+
+const Forecast = (props) => (
+  <div>
+    <section className='weather-header'>
+      <WeatherIcons
+        className={`weather-current-icon wi-forecast-io-${props.weatherCode}`}
+        name=''
+        size="4x"/>
+      <p className='weather-current-temp'>{props.currentTemp}°</p>
+    </section>
+    <section className='weather-forecast'>
+      <table className='forecast-table' cellSpacing={0}>
+        <tbody>
+          {props.forecasts.map((forecast, index) => (
+              <tr className='forecast-row' key={`row-${index}`}>
+                <td className='forecast-day'>{forecast.day}</td>
+                <td className='forecast-icon'>
+                  <WeatherIcons
+                    className={`weather-current-icon wi-forecast-io-${forecast.weatherCode}`}
+                    name=''
+                    size="2x"/>
+                </td>
+                <td className='forecast-high'>{forecast.tempHigh}</td>
+                <td className='forecast-low'>{forecast.tempLow}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </section>
+    <p className='weather-location'>{props.location}</p>
+  </div>
+)
 
 class Weather extends React.Component {
 
@@ -16,6 +61,7 @@ class Weather extends React.Component {
   }
 
   render() {
+    console.log(this.state.forecasts.length);
     return (
       <Module 
         className='weather'
@@ -26,34 +72,19 @@ class Weather extends React.Component {
           hourlyWeather={this.state.hourlyWeather }
         />}
       >
-        <section className='weather-header'>
-          <WeatherIcons
-            className={`weather-current-icon wi-forecast-io-${this.state.weatherCode}`}
-            name=''
-            size="4x"/>
-          <p className='weather-current-temp'>{this.state.currentTemp}°</p>
-        </section>
-        <section className='weather-forecast'>
-          <table className='forecast-table' cellSpacing={0}>
-            <tbody>
-              {this.state.forecasts.map((forecast, index) => (
-                  <tr className='forecast-row' key={`row-${index}`}>
-                    <td className='forecast-day'>{forecast.day}</td>
-                    <td className='forecast-icon'>
-                      <WeatherIcons
-                        className={`weather-current-icon wi-forecast-io-${forecast.weatherCode}`}
-                        name=''
-                        size="2x"/>
-                    </td>
-                    <td className='forecast-high'>{forecast.tempHigh}</td>
-                    <td className='forecast-low'>{forecast.tempLow}</td>
-                  </tr>
-                ))
-              }
-            </tbody>
-          </table>
-        </section>
-        <p className='weather-location'>{this.state.location}</p>
+        {
+          this.state.forecasts.length < 1 ? (
+            <Loading />
+          ) : (
+           <Forecast 
+             location={this.state.location}
+             currentTemp={this.state.currentTemp}
+             weatherCode={this.state.weatherCode}
+            forecasts={this.state.forecasts}
+           />
+          ) 
+        }
+        
       </Module>
     )
   }

@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const spawn = require('child_process').spawn;
 const fs = require('fs');
-const ngrok = require('ngrok');
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -19,8 +18,7 @@ const TODOIST_CLIENT_ID = '4ddd8c32dc914bc7b5f5ef4b4f8637b3';
 const TODOIST_CLIENT_SECRET = 'ae06fdc4a4084f96986b836fd615632c';
 const TODOIST_AUTH_COOKIE_NAME = 'todoist_token';
 
-
-app.use(function (req, res, next) {
+app.use(function (_, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     // Request methods you wish to allow
@@ -36,19 +34,8 @@ app.use(function (req, res, next) {
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-startNgrok();
 
-async function startNgrok() {
-    const url = await ngrok.connect({
-        addr: 3001,
-        subdomain: 'alecrodgers',
-    });
-    console.log('------------');
-    console.log(`Ngrok started @ ${url}`);
-    console.log('------------');
-}
-
-app.get('/api/modules/index', (req, res) => {
+app.get('/api/modules/index', (_, res) => {
     const indexProcess = spawn('python', ['./index_modules.py']);
     indexProcess.stdout.on('data', data => {
         const data_string = data.toString();
@@ -69,7 +56,7 @@ app.get('/api/weather', (req, res) => {
     });
 })
 
-app.get('/api/calendar/', (req, res) => {
+app.get('/api/calendar/', (_, res) => {
     const calendarId = 'alecr1997@gmail.com'
     const requestURL = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${GOOGLE_CALENDAR_API_KEY}`
     fetch(requestURL).then(response => {
@@ -82,7 +69,6 @@ app.get('/api/calendar/', (req, res) => {
 
 app.post('/api/mirror/config', (req, res) => {
     const moduleData = JSON.stringify(req.body);
-    console.log(moduleData);
     fs.writeFile('./client/src/config.json', moduleData, (err) => {
         if(err) {
             res.sendStatus(500);
@@ -92,7 +78,7 @@ app.post('/api/mirror/config', (req, res) => {
     })
 })
 
-app.get('/api/smartlights/groups', (req, res) => {
+app.get('/api/smartlights/groups', (_, res) => {
     const requestURL = `http://${HUE_IP}/api/${HUE_USERNAME}/groups`
     fetch(requestURL).then(response => {
         return response.json();
@@ -116,7 +102,7 @@ app.get('/api/smartlights/groups', (req, res) => {
 })
 
 
-app.get('/api/smartlights/lights', (req, res) => {
+app.get('/api/smartlights/lights', (_, res) => {
     const requestURL = `http://${HUE_IP}/api/${HUE_USERNAME}/lights/`
     fetch(requestURL).then(response => {
         return response.json();
@@ -177,7 +163,6 @@ app.get('/api/todo/auth', (req, res) => {
     if(!code || !secret) res.status(500).send('Code or secret not provided');
     if(secret !== TODOIST_CLIENT_SECRET) res.status(500).send('Provided secret does not match app secret');
     const requestURL = `https://todoist.com/oauth/access_token?client_id=${TODOIST_CLIENT_ID}&client_secret=${secret}&code=${code}`;
-    console.log(requestURL);
     fetch(requestURL, {
         method: "POST",
     }).then(response => {
@@ -199,9 +184,9 @@ app.get('/api/todo/auth', (req, res) => {
 app.get('/api/todo/authorized', (req, res) => {
     const token = req.cookies['todoist_token'];
     if(token) {
-        res.send(200, {'authorized': true});
+        res.status(200).json({'authorized': true});
     } else {
-        res.send(200, {'authorized': false});
+        res.status(200).json({'authorized': false});
     }
 })
 

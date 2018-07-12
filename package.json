@@ -2,10 +2,10 @@
   "name": "magic-mirror",
   "version": "1.0.0",
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
-  "main": "server.js",
+  "main": "start.js",
   "scripts": {
     "client": "cd client && npm run electron-dev",
-    "server": "node server.js",
+    "server": "node start.js",
     "start": "concurrently \"npm run server\" \"npm run client\"",
     "postinstall": "cd client && npm install"
   },
@@ -25,5 +25,8 @@
     "react-draggable": "^3.0.5",
     "react-fontawesome": "^1.6.1",
     "react-particles-js": "^2.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.0"
   }
 }
