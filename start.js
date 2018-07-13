@@ -7,7 +7,7 @@ async function startNgrok() {
       proto: 'http',
       addr: 3001,
       subdomain: 'alecrodgers',
-  })
+  });
   console.log(`[NGROK] Started @ ${url}`); 
 }
 
@@ -19,6 +19,7 @@ function startNodemon() {
   
   nodemon.on('start', function () {
       console.log('[NODEMON] App has started');
+      startNgrok();
     }).on('quit', function () {
       console.log('[NODEMON] App has quit');
     }).on('restart', function (files) {
@@ -28,7 +29,6 @@ function startNodemon() {
 
 function startServer() {
   startNodemon();
-  startNgrok();
 }
 
 startServer();

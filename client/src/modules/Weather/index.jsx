@@ -61,7 +61,6 @@ class Weather extends React.Component {
   }
 
   render() {
-    console.log(this.state.forecasts.length);
     return (
       <Module 
         className='weather'

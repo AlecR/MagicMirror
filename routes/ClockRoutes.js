@@ -1,0 +1,38 @@
+const express = require('express');
+const fetch = require('node-fetch');
+const Logger = require('../lib/Logger');
+
+const GOOGLE_CALENDAR_API_KEY = 'AIzaSyCdSizt6KqOy3_t_HwUk93fsKOR6Nt1rX0';
+const router = express.Router();
+const logger = new Logger('⏰');
+
+
+router.get('/', (_, res) => {
+  const calendarId = 'alecr1997@gmail.com'
+  const requestURL = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${GOOGLE_CALENDAR_API_KEY}`
+  fetch(requestURL).then(response => {
+    return response.json();
+  }).then(json => {
+    const eventData = parseCalendarData(json);
+    logger.log('Fetched calendar events')
+    res.json(eventData);
+  }).catch(err => {
+    logger.log(error)
+    console.log(err);
+  });
+});
+
+const parseCalendarData = json => {
+  const events = json.items.map(event => {
+    return {
+      name: event.summary,
+      id: event.id,
+      start: event.start.dateTime,
+      end: event.end.dateTime,
+      location: event.location,
+    }
+  });
+  return events;
+}
+
+module.exports = router;
