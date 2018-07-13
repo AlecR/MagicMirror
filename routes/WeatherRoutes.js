@@ -1,8 +1,10 @@
 const express = require('express');
 const fetch = require('node-fetch');
+const Logger = require('../lib/Logger');
 
 const WEATHER_API_KEY = '211442508a4f74ccbc238952adc10e13';
 const router = express.Router();
+const logger = new Logger('🌤');
 
 router.get('/forecast', (req, res) => {
   const lat = req.query.lat
