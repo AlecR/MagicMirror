@@ -27,6 +27,7 @@ const Forecast = (props) => (
         size="4x"/>
       <p className='weather-current-temp'>{props.currentTemp}°</p>
     </section>
+    <p className='weather-location'>{props.location}</p>
     <section className='weather-forecast'>
       <table className='forecast-table' cellSpacing={0}>
         <tbody>
@@ -47,7 +48,7 @@ const Forecast = (props) => (
         </tbody>
       </table>
     </section>
-    <p className='weather-location'>{props.location}</p>
+    
   </div>
 )
 
@@ -76,9 +77,9 @@ class Weather extends React.Component {
             <Loading />
           ) : (
            <Forecast 
-             location={this.state.location}
-             currentTemp={this.state.currentTemp}
-             weatherCode={this.state.weatherCode}
+            location={this.state.location}
+            currentTemp={this.state.currentTemp}
+            weatherCode={this.state.weatherCode}
             forecasts={this.state.forecasts}
            />
           ) 
@@ -121,7 +122,7 @@ class Weather extends React.Component {
       const hourlyWeather = filteredData.map(weatherEntry => {
         const date = new Date(weatherEntry.time * 1000)
         const hours = date.getHours()
-        const time = hourToTime(hours);
+        const time = WeatherHelper.hourToTime(hours);
         const weatherCode = weatherEntry.icon;
         const temp = parseInt(weatherEntry.temperature, 10);
         const precipChance = parseInt(weatherEntry.precipProbability, 10);
@@ -130,19 +131,9 @@ class Weather extends React.Component {
       this.setState({ hourlyWeather });
     }
 
-    const hourToTime = hour => {
-      if(hour === 0) {
-        return "12 AM";
-      } else if(hour === 12) {
-        return "12 PM";
-      }
-
-      if (hour <= 12) {
-        return `${hour} AM`;
-      } else {
-        return `${hour-12} PM`;
-      }
-    }
+    WeatherHelper.getLocation(location => {
+      this.setState({ location });
+    })
 
     WeatherHelper.getWeatherData(updateHourlyData)
     setInterval(() => {
