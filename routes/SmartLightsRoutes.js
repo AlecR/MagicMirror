@@ -24,10 +24,10 @@ router.get('/groups', (_, res) => {
           }
       })
       logger.log('Fetched smartlight groups'); 
-      res.json(rooms);
+      res.status(200).json(rooms);
   }).catch(err => {
-      logger.log(err);
-      res.sendStatus(500);
+      logger.error(err);
+      res.status(500).send(err);
    })
 })
 
@@ -49,10 +49,10 @@ router.get('/lights', (_, res) => {
           }
       });
       logger.log('Fetched smartlights');
-      res.json(formattedLightData);
+      res.status(200).json(formattedLightData);
   }).catch(err => {
-      logger.log(err)
-      res.sendStatus(500);
+      logger.error(err);
+      res.status(500).send(err);
    });
 });
 
@@ -69,10 +69,10 @@ router.get('/lights/:id', (req, res) => {
           lightId: id
       };
       logger.log(`Fetched data for light ${id}`);
-      res.json(lightData);
+      res.status(200).json(lightData);
   }).catch(err => {
-      logger.log(err);
-      res.sendStatus(500);
+      logger.error(err);
+      res.status(500).send(err);
    });
 });
 
@@ -80,15 +80,16 @@ router.put('/lights/:id/state', (req, res) => {
   const id = req.params.id;
   const requestURL = `http://${HUE_IP}/api/${HUE_USERNAME}/lights/${id}/state`;
   fetch(requestURL, {
-      method: "PUT",
-      body: JSON.stringify(req.body)
+    method: "PUT",
+    body: JSON.stringify(req.body)
   }).then(response => {
-      return response.json();
+    return response.json();
   }).then(json => {
-      logger.log(`Updated state for light ${id}`);
-      res.json(json);
+    logger.log(`Updated state for light ${id}`);
+    res.status(200).json(json);
   }).catch(err => {
-    logger.log(err);
+    logger.error(err);
+    res.status(500).send(err);
   });
 });
 

@@ -15,6 +15,9 @@ router.get('/modules/index', (_, res) => {
 		logger.log('Indexed modules');
 		indexProcess.kill();
 		res.status(200).json(data_json);
+	}).on('error', err => {
+		logger.error(err);
+		res.status(500).send(err);
 	})
 });
 
@@ -22,8 +25,8 @@ router.post('/config', (req, res) => {
 	const moduleData = JSON.stringify(req.body);
 	fs.writeFile('./client/src/config.json', moduleData, (err) => {
 		if(err) {
-			logger.log('Failed to updated config.json')
-			res.sendStatus(500);
+			logger.error(`Failed to updated config.json - ${err}`)
+			res.status(500).send(err);
 		} else {
 			logger.log('Updated config.json');
 			res.sendStatus(200);

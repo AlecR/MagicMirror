@@ -14,11 +14,11 @@ router.get('/', (_, res) => {
     return response.json();
   }).then(json => {
     const eventData = parseCalendarData(json);
-    logger.log('Fetched calendar events')
-    res.json(eventData);
+    logger.log('Fetched calendar events');
+    res.status(200).json(eventData);
   }).catch(err => {
-    logger.log(error)
-    console.log(err);
+    logger.error(err);
+    res.status(500).send(err);
   });
 });
 

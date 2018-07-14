@@ -14,10 +14,10 @@ router.get('/forecast', (req, res) => {
       return response.json(); 
   }).then(json => {
       logger.log(`Fetched forecast data for (${lat}, ${lon})`);
-      res.json(json);
+      res.status(200).json(json);
   }).catch(err => {
-      logger.log(err);
-      console.log(err);
+      logger.error(err);
+      res.status(500).send(err);
   });
 });
 

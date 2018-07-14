@@ -33,7 +33,7 @@ router.get('/auth', (req, res) => {
       maxAge: 3600 * 1000 * 25 * 365 * 10,
     }).sendStatus(200);
   }).catch(err => {
-    logger.log(err);
+    logger.error(err);
     res.status(500).send(err);
   })
 })
@@ -49,7 +49,6 @@ router.get('/authorized', (req, res) => {
   }
 })
 
-
 router.get('/tasks', (req, res) => {
   const token = req.cookies['todoist_token'];
   const requestURL = 'https://beta.todoist.com/API/v8/tasks'
@@ -63,7 +62,7 @@ router.get('/tasks', (req, res) => {
     logger.log('Fetched tasks');
     res.status(200).json(json);
   }).catch(err => {
-    logger.log(err);
+    logger.error(err);
     res.status(500).send(err);
   })
 })
@@ -79,8 +78,9 @@ router.get('/tasks/:id/close', (req, res) => {
     }
   }).then(_ => {
     logger.log(`Closed task ${id}`)
+    res.sendStatus(200);
   }).catch(err => {
-    logger.log(err);
+    logger.error(err);
     res.status(500).send(err);
   })
 })
@@ -99,7 +99,7 @@ router.get('/projects', (req, res) => {
     logger.log('Fetched projects');
     res.status(200).json(json);
   }).catch(err => {
-    logger.log(err);
+    logger.error(err);
     res.status(500).send(err);
   })
 })
