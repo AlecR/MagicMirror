@@ -26,6 +26,7 @@ const MirrorGrid = (props) => {
         }}
         key={`module-${index}`}
       >
+        {module ? <button onClick={() => props.removeModule(moduleIndex)}>X</button> : null}
         <p className='mirror-grid-module-name'>{module ? module.name : ''}</p>
       </div>
     )

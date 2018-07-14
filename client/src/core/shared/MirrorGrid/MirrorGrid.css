@@ -18,11 +18,28 @@
 }
 
 .mirror-grid-module-container {
+  position: relative;
   display: flex;
   flex: 1;
   border: 1px solid white;
   font-size: 20px;
   font-weight: lighter;
+}
+
+.mirror-grid-module-container button {
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  background-color: black;
+  border: none;
+  color: white;
+  right: 0;
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+.mirror-grid-module-container button:focus {
+  outline: none;
 }
 
 .mirror-grid-module-name {

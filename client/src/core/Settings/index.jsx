@@ -70,8 +70,8 @@ export default class Settings extends Component {
     return (
       <Module 
         name='settings'
-        popoutHeight={600}
-        popoutWidth={1200}
+        popoutHeight={1200}
+        popoutWidth={1000}
         popoutView={<SettingsPopout />}
       >
         <div className='settings'> 

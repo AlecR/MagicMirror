@@ -7,8 +7,7 @@ const SettingsPopout = (props) =>  (
       <p className='settings-popout-title'>Settings</p>
     </div>
     <div className='settings-popout-body'>
-      <MirrorConfiguration
-        horizontal={true} 
+      <MirrorConfiguration 
         onSaveSuccess={() => {
           window.location = "http://localhost:3000/dashboard";
         }}

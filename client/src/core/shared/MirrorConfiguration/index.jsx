@@ -14,16 +14,6 @@ export default class MirrorConfiguration extends Component {
     selectedMirrorPosition: null,
   }
 
-  updateModulePositions = (moduleConfig) => {
-    const modulePositions = this.state.modulePositions.slice();
-    moduleConfig.forEach(module => {
-      if(module.position){
-        modulePositions[module.position] = module.name
-      }
-    })
-    this.setState({ modulePositions })
-  }
-
   updateMirrorConfiguration = (selectedPosition) => {
     if(this.state.selectedModuleIndex === null) return;
     const modules = this.state.modules;
@@ -43,6 +33,14 @@ export default class MirrorConfiguration extends Component {
   updateSelectedTableModuleIndex = (changeEvent) => {
     const selectedModuleIndex = parseInt(changeEvent.target.dataset.moduleIndex, 10);
     this.setState({ selectedModuleIndex });
+  }
+
+  removeModule = (index) => {
+    const modules = this.state.modules;
+    console.log(index);
+    console.log(modules[index]);
+    modules[index].position = null;
+    this.setState({ modules });
   }
 
   saveUpdatedConfig = () => {
@@ -84,6 +82,7 @@ export default class MirrorConfiguration extends Component {
             onMirrorModuleClick={this.updateMirrorConfiguration}
             selectedModuleIndex={this.state.selectedModuleIndex}
             selectedMirrorPosition={this.state.selectedTableModuleName}
+            removeModule={this.removeModule}
           />
         </div>
         <div className='mirror-configuration-table'>
