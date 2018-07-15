@@ -41,13 +41,17 @@ class Module extends React.Component {
     return { x, y }
   }
 
-  
+  closePopout = () => {
+    this.setState({ showingPopoutView: false })
+  }
 
   render() {
     const Popout = this.state.showingPopoutView && this.props.popoutView ? (
       <DraggablePopout
         id={this.props.name}
         styles={this.getStyles()}
+        onCloseClick={this.closePopout}
+        displayPopoutCloseButton={this.props.displayPopoutCloseButton}
       >
         {this.props.popoutView}
       </DraggablePopout>

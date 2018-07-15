@@ -26,13 +26,11 @@ export default class HackerNews extends Component {
   }
 
   onStoryClick = (event, story) => {
-    var selectedStoryURL = null;
-    if(story.canOpen){
-      selectedStoryURL = story.url;
+    if(story.canOpen) {
+      this.setState({ selectedStoryURL: story.url });
     } else {
       event.stopPropagation();
     }
-    this.setState({ selectedStoryURL });
   }
 
   render() {
@@ -40,8 +38,9 @@ export default class HackerNews extends Component {
     return(
       <Module
         name='HackerNews'
-        popoutHeight={1000} // Change this to adjust the height of your popout
-        popoutWidth={1000}  // Change this to adjust the width of your popout
+        popoutHeight={1000}
+        popoutWidth={1000} 
+        displayPopoutCloseButton
         popoutView={
         <HackerNewsPopout 
           selectedStoryURL={this.state.selectedStoryURL}
