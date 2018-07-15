@@ -9,7 +9,8 @@ const weatherRouter = require('./routes/WeatherRoutes');
 const smartLightsRouter = require('./routes/SmartLightsRoutes');
 const clockRouter = require('./routes/ClockRoutes');
 const toDoRouter = require('./routes/ToDoRoutes');
-const mirrorRoutes = require('./routes/MirrorRoutes');
+const mirrorRouter = require('./routes/MirrorRoutes');
+const hackerNewsRouter = require('./routes/HackerNewsRoutes');
 
 const middleware = function (_, res, next) {
 	// Website you wish to allow to connect
@@ -25,14 +26,19 @@ const middleware = function (_, res, next) {
 	next();
 };
 
+addRoutes = (name, router) => {
+	app.use(`/api/${name}`, middleware, router)
+};
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use('/api/weather', middleware, weatherRouter);
-app.use('/api/smartlights', middleware, smartLightsRouter);
-app.use('/api/calendar', middleware, clockRouter);
-app.use('/api/todo', middleware, toDoRouter);
-app.use('/api/mirror', middleware, mirrorRoutes);
+addRoutes('weather', weatherRouter);
+addRoutes('smartlights', smartLightsRouter);
+addRoutes('calendar', clockRouter);
+addRoutes('todo', toDoRouter);
+addRoutes('mirror', mirrorRouter);
+addRoutes('hackernews', hackerNewsRouter);
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}!`);
