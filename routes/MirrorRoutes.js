@@ -6,7 +6,6 @@ const Logger = require('../lib/Logger');
 const router = express.Router();
 const logger = new Logger('💻');
 
-
 router.get('/modules/index', (_, res) => {
 	const indexProcess = spawn('python', ['./index_modules.py']);
 	indexProcess.stdout.on('data', data => {

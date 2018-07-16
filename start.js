@@ -1,5 +1,8 @@
 const ngrok = require('ngrok');
 const nodemon = require('nodemon');
+const Logger = require('./lib/Logger');
+
+const logger = new Logger('🔋');
 
 
 async function startNgrok() {
@@ -8,7 +11,7 @@ async function startNgrok() {
       addr: 3001,
       subdomain: 'alecrodgers',
   });
-  console.log(`[NGROK] Started @ ${url}`); 
+  logger.log(`Ngrok started @ ${url}`); 
 }
 
 function startNodemon() {
@@ -18,12 +21,12 @@ function startNodemon() {
   });
   
   nodemon.on('start', function () {
-      console.log('[NODEMON] App has started');
+      logger.log('Nodemon started');
       startNgrok();
     }).on('quit', function () {
-      console.log('[NODEMON] App has quit');
+      logger.log('Nodemon has quit');
     }).on('restart', function (files) {
-      console.log('[NODEMON] App restarted due to: ', files);
+      logger.log('Nodemon restarted due to: ', files);
     });
 }
 
