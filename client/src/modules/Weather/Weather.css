@@ -117,21 +117,3 @@
 .popout-forecast-icon {
     font-size: 40px !important;
 }
-
-.loading {
-    padding-top: 50px;
-}
-
-.weather-loading-spinner {
-   text-align: center;
-   width: 80px;
-   padding-bottom: 20px;
-   margin: auto;
-}
-
-.weather-loading-title {
-    font-weight: lighter;
-    font-size: 25px;
-    text-align: center;
-    margin: 0;
-}

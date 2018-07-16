@@ -1,22 +1,11 @@
 import React from 'react';
 import WeatherHelper from './WeatherHelper.js';
 import WeatherIcons from 'react-weathericons';
+import LoadingSpinner from 'core/shared/LoadingSpinner';
 import Module from 'core/Module';
 import WeatherPopout from './WeatherPopout';
-import Spinner from 'react-spinkit';
 import 'weathericons/css/weather-icons.css';
 import './Weather.css';
-
-const Loading = () => (
-  <div className='loading'>
-    <Spinner 
-      className='weather-loading-spinner'
-      name='three-bounce'
-      color='white' 
-    />
-    <p className='weather-loading-title'>Loading Weather...</p>
-  </div>
-)
 
 const Forecast = (props) => (
   <div>
@@ -74,7 +63,9 @@ class Weather extends React.Component {
       >
         {
           this.state.forecasts.length < 1 ? (
-            <Loading />
+            <LoadingSpinner 
+              loadingText='Loading Weather...'
+            />
           ) : (
            <Forecast 
             location={this.state.location}
