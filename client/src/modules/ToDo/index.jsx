@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Module from 'core/Module';
+import LoadingSpinner from 'core/shared/LoadingSpinner';
 import { Route } from 'react-router-dom';
 import ToDoHelper from './ToDoHelper.jsx';
 import ToDoList from './ToDoList';
@@ -34,8 +35,6 @@ const UnauthorizedScreen = () => (
 
 export default class ToDo extends Component {
 
-  
-
   state = {
     authorized: false,
     tasks: [],
@@ -49,8 +48,7 @@ export default class ToDo extends Component {
         this.setState({ authorized });
         this.fetchData();
       }
-      
-    })
+    });
   }
 
   toggleTask = (event, task) => {
@@ -93,15 +91,22 @@ export default class ToDo extends Component {
         popoutWidth={500}  // Change this to adjust the width of your popout
         popoutView={null}
       >
-        {this.state.authorized ? (
-          <ToDoList 
-            tasks={this.state.tasks}
-            projects={this.state.projects}
-            onCheckClick={this.toggleTask}
-          />
+        {this.state.tasks.length > 0 ? (
+          this.state.authorized ? (
+            <ToDoList 
+              tasks={this.state.tasks}
+              projects={this.state.projects}
+              onCheckClick={this.toggleTask}
+            />
+          ) : (
+            <UnauthorizedScreen />
+          )
         ) : (
-          <UnauthorizedScreen />
+          <LoadingSpinner 
+            loadingText='Loading Todoist Tasks...'
+          />
         )}
+        
         <AuthRouter />
       </Module>
     )
