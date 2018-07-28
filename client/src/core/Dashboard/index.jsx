@@ -10,58 +10,20 @@ export default class Dashboard extends Component {
     })
     
     return (
-      <div className='dashboard'>
-        <section className='dashboard-row-sm'>
-          <div className='module-container'>
-            {modules[0]}
-          </div>
-          <div className='module-container'>
-            {modules[1]}
-          </div>
-        </section>
-        <section className='dashboard-row'>
-          <div className='module-container'>
-            {modules[2]}
-          </div>
-          <div className='module-container'>
-            {modules[3]}
-          </div>
-          <div className='module-container'>
-            {modules[4]}
-          </div>
-        </section>
-        <section className='dashboard-row'>
-          <div className='module-container'>
-            {modules[5]}
-          </div>
-          <div className='module-container'>
-            {modules[6]}
-          </div>
-          <div className='module-container'>
-            {modules[7]}
-          </div>
-        </section>
-        <section className='dashboard-row'>
-          <div className='module-container'>
-            {modules[8]}
-          </div>
-          <div className='module-container'>
-            {modules[9]}
-          </div>
-          <div className='module-container'>
-            {modules[10]}
-          </div>
-        </section>
-        <section className='dashboard-row-sm'>
-          <div className='module-container'>
-            {modules[11]}
-          </div>
-          <div className='module-container'>
+      <div className='dashboard__grid'>
+        {
+          modules.map((module, index) => {
+            return (
+              <div className={`dashobard__module-container dashboard__module-${index}`}>
+                {module}
+              </div>
+            )
+          })    
+        }
+        <div className={`dashobard__module-container dashboard__module-${modules.length}`}>
           <Settings />
-          </div>
-        </section>
+        </div>
       </div>
-      
     )
   }
 }
