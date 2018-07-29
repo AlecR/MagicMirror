@@ -79,14 +79,64 @@
 
 /** CLOCK POP OUT */
 
-.clock-pop-out {
+.clock-popout {
     border: 2px solid white;
     background-color: black;
-    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
     height: 100%;
-    width: 100%;
     cursor: move;
 }
+
+.calendar-popout__sidebar {
+    padding: 0 15px;
+    width: 100%;
+}
+
+
+.calendar-popout__sidebar-date {
+    text-align: center;
+    padding-top: 50px;
+    font-size: 25px;
+    font-weight: lighter;
+}
+
+.calendar-popout__sidebar-event-title {
+    margin: 10px 0;
+}
+
+.calendar-popout__sidebar-event-time {
+    margin: 10px 0;
+}
+
+.calendar-popout__sidebar-event-location {
+    margin: 10px 0;
+}
+
+.calendar-popout__sidebar-event-divider-wrapper {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    padding: 10px;
+    height: 20px;
+}
+
+.calendar-popout__sidebar-event-divider {
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+    background-color: white;
+    height: 1px;
+}
+
+.calendar-popout__sidebar-no-events {
+    padding-top: 50px;
+    font-size: 20px;
+    font-weight: lighter;
+    opacity: 0.5;
+    text-align: center;
+}
+
 
 /** CALENDAR CUSTOMIZATION */
 
@@ -125,11 +175,16 @@
     color: black;
 }
 
-.rbc-date-cell.rbc-now a {
-    background: red;
+.rbc-now span {
+    font-weight: bolder;
+    background-color: red;
     padding: 5px;
     font-weight: lighter;
     border-radius: 100%
+}
+
+.rbc-row-segment .rbc-event-content {    
+    white-space: normal !important;
 }
 
 .custom-toolbar {

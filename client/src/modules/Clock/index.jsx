@@ -86,8 +86,8 @@ class Clock extends React.Component {
     return (
       <Module 
         name='clock'
-        popoutHeight={1000}
-        popoutWidth={1000}
+        popoutHeight={800}
+        popoutWidth={1100}
         popoutView={<ClockPopout 
           events={this.state.events}
           date={this.state.date}

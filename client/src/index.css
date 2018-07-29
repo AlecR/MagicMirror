@@ -22,3 +22,7 @@ body {
   user-select: none;
   padding: 10px 30px;
 }
+
+* {
+  box-sizing: border-box;
+}
