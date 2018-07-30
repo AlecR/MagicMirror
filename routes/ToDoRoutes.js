@@ -23,9 +23,8 @@ router.get('/auth', (req, res) => {
     const token = json.access_token;
     if (!token) { 
       logger.log('Didn\'t get a token!');
-      res.sendStatus(500).send("Didn't get a token");
+      res.status(500).send("Didn't get a token");
     }
-    logger.log('Successfully authorized user');
     res.cookie(TODOIST_AUTH_COOKIE_NAME, token, {
       path: '/', 
       httpOnly: false,

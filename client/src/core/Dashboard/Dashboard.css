@@ -13,6 +13,10 @@
     "module-11   module-11   module-11   module-12   module-12   module-12";
 }
 
+.dashobard__module-container {
+  overflow: hidden;
+}
+
 .dashboard__module-0 { grid-area: module-0; }
 
 .dashboard__module-1 { grid-area: module-1; }

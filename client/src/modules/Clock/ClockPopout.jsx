@@ -79,7 +79,7 @@ export default class ClockPopout extends Component {
           }}
           onSelectEvent={ event => {
             const date = new Date(event.start).setHours(0, 0, 0, 0);
-            this.handleSelectedDate(event.start);
+            this.handleSelectedDate(date);
           }}
           components={{
             toolbar: this.CustomToolbar
@@ -104,8 +104,11 @@ const Sidebar = props => (
     {
       props.selectedDate ? (
         props.selectedEvents.length > 0 ? (
-          props.selectedEvents.map( event => (
-            <div className='calendar-popout__sidebar-event'>
+          props.selectedEvents.map((event, index) => (
+            <div 
+              className='calendar-popout__sidebar-event'
+              key={`sidebar-event-${index}`}
+            >
               <p className='calendar-popout__sidebar-event-title'>
                 <FontAwesome name='calendar' className='calendar-popout__sidebar-icon' /> {event.title}
               </p>

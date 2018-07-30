@@ -1,0 +1,147 @@
+.strava__wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 100px 1fr;
+  grid-gap: 5px;
+  height: 100%;
+  overflow: hidden;
+  
+}
+
+/* ======================== */
+/* === RunMap Component === */
+/* ======================== */
+
+.strava-run-map {
+  grid-column: span 1;
+}
+
+/* ========================= */
+/* === RunInfo Component === */
+/* ========================= */
+
+.strava-latest-run-info__wrapper {
+  grid-column: span 1;
+  display: grid;
+  grid-template-rows: 40px 40px 40px 1fr;
+  grid-template-columns: 1fr 1fr;
+  font-weight: lighter;
+  justify-items: center;
+}
+
+.strava-latest-run-info__title {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-size: 20px;
+  margin: 0;
+  align-self: center;
+}
+
+.strava-latest-run-info__distance {
+  grid-column: span 1;
+  margin: 0;
+}
+
+.strava-latest-run-info__distance--large {
+  font-size: 30px;
+  margin: 0;
+} 
+.strava-latest-run-info__time-wrapper {
+  grid-column: span 1;
+}
+.strava-latest-run-info__time {
+  font-size: 30px;
+  padding: 0;
+  margin: 0;
+  display: inline;
+}
+
+.strava-latest-run-info__time-icon {
+  font-size: 15px;
+  line-height: 15px;
+  line-height: 40px;
+  height: 100%;
+  vertical-align: top;
+}
+
+.strava-latest-run-info__heart-rate-wrapper {
+  grid-column: span 1;
+}
+
+.strava-latest-run-info__heart-rate-icon {
+  font-size: 15px;
+  line-height: 15px;
+  line-height: 40px;
+  height: 100%;
+  vertical-align: top;
+}
+
+.strava-latest-run-info__heart-rate {
+  padding: 0;
+  margin: 0;
+  display: inline;
+}
+
+.strava-latest-run-info__heart-rate--large {
+  font-size: 30px;
+  margin: 0;
+} 
+
+.strava-latest-run-info__pace-wrapper {
+  grid-column: span 1;
+}
+
+.strava-latest-run-info__pace-icon {
+  font-size: 15px;
+  line-height: 15px;
+  line-height: 40px;
+  height: 100%;
+  vertical-align: top;
+}
+
+.strava-latest-run-info__pace {
+  padding: 0;
+  margin: 0;
+  display: inline;
+}
+
+.strava-latest-run-info__pace--large {
+  font-size: 30px;
+  margin: 0;
+} 
+
+/* ============================ */
+/* === MilageGrid Component === */
+/* ============================ */
+
+.mileage-grid__grid {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.mileage-grid__title {
+  text-align: center;
+  font-size: 25px;
+  font-weight: lighter;
+  grid-column: 1 / -1;
+}
+
+.mileage-grid__week-day {
+  border: 1px solid white;
+  text-align: center;
+  padding: 5px;
+  font-weight: lighter;
+}
+
+.mileage-grid__week-day--today {
+  font-weight: bolder;
+}
+
+.mileage-grid__mileage {
+  border: 1px solid white;
+  text-align: center;
+  padding: 5px;
+}
+

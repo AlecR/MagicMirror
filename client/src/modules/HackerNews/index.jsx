@@ -51,11 +51,10 @@ export default class HackerNews extends Component {
         {
           this.state.stories.length > 1 ? (
             <table className='hackernews-table'>
-              <caption>HackerNews Top Stories</caption>
-              <div className='line'></div>
+              <caption className='hackernews-table-title'>HackerNews Top Stories</caption>
+              
               <tbody>
-              {
-                this.state.stories.map(story => (
+                {this.state.stories.map(story => (
                   <tr
                     key={story.id}
                     onClick={(event) => this.onStoryClick(event, story)}
@@ -67,8 +66,7 @@ export default class HackerNews extends Component {
                       <span className='hackernews-article-url'>({HackerNewsHelper.parseDomain(story.url)})</span>
                     </td>
                   </tr>
-                ))
-              }
+                ))}
               </tbody>
             </table>
           ) : (

@@ -28,8 +28,17 @@
   max-width: 400px;
 }
 
-.hackernews-table caption {
+.hackernews-table-title {
   font-weight: normal;
+}
+
+.hackernews-table-title::after {
+  background-color: white;
+  width: 50%;
+  height: 1px;
+  content: '';
+  display: block;
+  margin: 10px auto;
 }
 
 .hackernews-article-url {

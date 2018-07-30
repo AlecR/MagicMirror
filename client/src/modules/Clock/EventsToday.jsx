@@ -21,11 +21,6 @@ const EventsToday = (props) => (
                     <span className='event-title'>{event.title}</span>
                     <span className='event-time'>{startTime} - {endTime}</span>
                   </div>
-                  <br />
-                  <div className='event-footer'>
-                    <p className='event-location'>{event.location}</p>
-                  </div>
-                  
                 </td>
                 
               </tr>

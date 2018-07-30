@@ -11,6 +11,7 @@ const clockRouter = require('./routes/ClockRoutes');
 const toDoRouter = require('./routes/ToDoRoutes');
 const mirrorRouter = require('./routes/MirrorRoutes');
 const hackerNewsRouter = require('./routes/HackerNewsRoutes');
+const stravaRouter = require('./routes/StravaRoutes');
 
 const middleware = function (_, res, next) {
 	// Website you wish to allow to connect
@@ -39,6 +40,7 @@ addRoutes('calendar', clockRouter);
 addRoutes('todo', toDoRouter);
 addRoutes('mirror', mirrorRouter);
 addRoutes('hackernews', hackerNewsRouter);
+addRoutes('strava', stravaRouter);
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}!`);

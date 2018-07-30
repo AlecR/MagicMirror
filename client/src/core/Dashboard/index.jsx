@@ -14,7 +14,10 @@ export default class Dashboard extends Component {
         {
           modules.map((module, index) => {
             return (
-              <div className={`dashobard__module-container dashboard__module-${index}`}>
+              <div 
+              className={`dashobard__module-container dashboard__module-${index}`}
+              key={`module-${index}`}
+            >
                 {module}
               </div>
             )
