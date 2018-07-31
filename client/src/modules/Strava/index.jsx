@@ -133,7 +133,7 @@ export default class Strava extends Component {
     var recentRun = null;
     var recentRunPolyline = null;
     if(this.state.activities.length > 0) {
-      recentRun = this.state.activities[0];
+      recentRun = this.state.activities[this.state.activities.length - 1];
       recentRunPolyline = recentRun.map.summary_polyline;
     }
     return(

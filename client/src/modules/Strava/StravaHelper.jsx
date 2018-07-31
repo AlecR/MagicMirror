@@ -70,7 +70,10 @@ const averageSpeedToPace = speed => {
 
 const secondsToFormattedTimeString = totalSeconds => {
   const minutes = Math.floor(totalSeconds / 60);
-  const seconds = parseInt(totalSeconds - minutes * 60, 10);
+  var seconds = parseInt(totalSeconds - minutes * 60, 10);
+  if(seconds < 10) {
+    seconds = `0${seconds}`;
+  }
   const time = `${minutes}:${seconds}`;
   return time;
 }
