@@ -20,14 +20,12 @@ const getStyles = (props) => {
   }
 }
 
-
-const brightnessDragHandler = (event, props) => {
-  var newBrightness = props.brightness - (dragDistance / 2);
+const brightnessDragHandler = (brightnessPercent, props) => {
+  var newBrightness = brightnessPercent * 254;
   if(newBrightness < 0) {
     newBrightness = 1;
-  } else if(newBrightness > 254) {
-    newBrightness = 254;
   }
+  console.log(`Setting brightness to ${newBrightness}`);
   props.updateBrightness(props.lightId, newBrightness);
 } 
 
@@ -45,40 +43,46 @@ const SmartLight = (props) => (
       onClick={() => props.onLightClick(props.lightId, !props.on)}
       draggable={true}
       onTouchMove={(event) => {
+        const positionData = event.target.getBoundingClientRect();
+        const dragPos = event.touches[0].clientY;
+        var brightnessPercent;
+        if(dragPos > positionData.bottom) {
+          brightnessPercent = 0;
+        } else if(dragPos < positionData.top) {
+          brightnessPercent = 1;
+        } else {
+          const distanceFromTop = dragPos - positionData.top;
+          brightnessPercent = 1 - (distanceFromTop / positionData.height);
+        }
         const currentTime = new Date().getTime();
         if(!lastRequest || currentTime - lastRequest > 100) {
           lastRequest = currentTime;
           if(event.clientY !== 0) {
             dragDistance = event.touches[0].clientY - dragStartPos;
           }
-          brightnessDragHandler(event, props);
+          brightnessDragHandler(brightnessPercent, props);
         }
-        
-      }}
-      onTouchStart={(event) => {
-        dragStartPos = event.touches[0].clientY;
-      }}
-      onTouchEnd={(event) => {
-        lastRequest = null;
-        dragStartPos = null;
       }}
       onDrag={(event) => {
+        const positionData = event.target.getBoundingClientRect();
+        const dragPos = event.clientY;
+        var brightnessPercent;
+        if(dragPos > positionData.bottom) {
+          brightnessPercent = 0;
+        } else if(dragPos < positionData.top) {
+          brightnessPercent = 1;
+        } else {
+          const distanceFromTop = dragPos - positionData.top;
+          brightnessPercent = 1 - (distanceFromTop / positionData.height);
+        }
         const currentTime = new Date().getTime();
         if(!lastRequest || currentTime - lastRequest > 100) {
           lastRequest = currentTime;
-          if(event.clientY !== 0) {
-            dragDistance = event.clientY - dragStartPos;
-          }
-          brightnessDragHandler(event, props);
+          brightnessDragHandler(brightnessPercent, props);
         }
       }}
       onDragStart={(event) => {
-        dragStartPos = event.clientY;
         event.dataTransfer.setDragImage(dragPreview(), 0, 0)
-      }}
-      onDragEnd={(event) => {
-        lastRequest = null;
-        dragStartPos = null;
       }}
     >
       <div className='smart-light-brightness' style={getStyles(props)}></div>

@@ -37,7 +37,7 @@ export default class SmartLights extends Component {
   };
 
   updateBrightness = (id, brightness) => {
-    const body = {'bri': brightness};
+    const body = {'bri': parseInt(brightness)};
     SmartLightsHelper.updateState(id, body, response => {
       if(response.length > 0 && response[0].success){
         const lights = this.state.lights;
