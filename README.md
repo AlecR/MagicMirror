@@ -1,1 +1,1 @@
-# Magic Mirror
+# Smart Mirror
