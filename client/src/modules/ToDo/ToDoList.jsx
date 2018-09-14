@@ -2,8 +2,16 @@ import React from 'react';
 
 const ToDoList = (props) => {
   const sortedTasks = props.tasks.sort((taskOne, taskTwo) => {
-    const taskOneDate = new Date(taskOne.due.date);
-    const taskTwoDate = new Date(taskTwo.due.date);
+    let taskOneDate = new Date();
+    let taskTwoDate = new Date();
+    if(taskOneDate.due){
+      taskOneDate = new Date(taskOneDate.due.date);
+    }
+    if(taskTwoDate.due){
+      taskTwoDate = new Date(taskTwoDate.due.date);
+    }
+    console.log(taskOneDate);
+    console.log(taskTwoDate);
     return taskOneDate > taskTwoDate;
   })
   return (
@@ -13,7 +21,10 @@ const ToDoList = (props) => {
         <tbody>
           {sortedTasks.map(task => {
             const dateOptions = { weekday: 'long', month: 'long', day: 'numeric'};
-            const dueDate = new Date(task.due.date).toLocaleDateString('en-US', dateOptions);
+            let dueDate = null;
+            if(task.due) {
+              dueDate = new Date(task.due.date).toLocaleDateString('en-US', dateOptions);
+            }
             const projectName = props.projects[task.project_id].name;
             const imageName = task.completed ? './assets/checked.png' : './assets/unchecked.png';
             return (

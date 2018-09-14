@@ -6,6 +6,7 @@
 
 # config
 /client/src/config.json
+.env
 
 # testing
 /coverage

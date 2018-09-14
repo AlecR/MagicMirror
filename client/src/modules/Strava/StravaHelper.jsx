@@ -64,8 +64,12 @@ const metersToMiles = meters => {
 }
 
 const averageSpeedToPace = speed => {
+  if(speed === 'Infinity:NaN' || speed === 0){
+    return (<span className='strava-latest-run-info__pace--large'>--</span>)
+  }
   const secondsPerMile = METERS_PER_MILE / speed;
-  return secondsToFormattedTimeString(secondsPerMile);
+  const pace = secondsToFormattedTimeString(secondsPerMile); 
+  return (<div><span className='strava-latest-run-info__pace--large'>{pace}</span> / mile</div>);
 }
 
 const secondsToFormattedTimeString = totalSeconds => {

@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
+require('dotenv').config();
+
 const app = express();
 const port = process.env.PORT || 3001;
 
@@ -12,6 +14,8 @@ const toDoRouter = require('./routes/ToDoRoutes');
 const mirrorRouter = require('./routes/MirrorRoutes');
 const hackerNewsRouter = require('./routes/HackerNewsRoutes');
 const stravaRouter = require('./routes/StravaRoutes');
+
+
 
 const middleware = function (_, res, next) {
 	// Website you wish to allow to connect

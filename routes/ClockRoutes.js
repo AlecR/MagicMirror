@@ -2,7 +2,7 @@ const express = require('express');
 const fetch = require('node-fetch');
 const Logger = require('../lib/Logger');
 
-const GOOGLE_CALENDAR_API_KEY = 'AIzaSyCdSizt6KqOy3_t_HwUk93fsKOR6Nt1rX0';
+const GOOGLE_CALENDAR_API_KEY = process.env.GOOGLE_API_KEY;
 const router = express.Router();
 const logger = new Logger('⏰');
 

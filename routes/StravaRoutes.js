@@ -2,8 +2,8 @@ const express = require('express');
 const fetch = require('node-fetch');
 const Logger = require('../lib/Logger');
 
-const STRAVA_CLIENT_ID = '27346';
-const STRAVA_CLIENT_SECRET = '4b24ee8b01a912913acd6fde8d5be511763979aa';
+const STRAVA_CLIENT_ID = process.env.STRAVA_CLIENT_ID;
+const STRAVA_CLIENT_SECRET = process.env.STRAVA_CLIENT_SECRET;
 const STRAVA_AUTH_COOKIE_NAME = 'strava_token';
 const router = express.Router();
 const logger = new Logger('👟');

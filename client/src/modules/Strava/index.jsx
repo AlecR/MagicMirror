@@ -57,7 +57,7 @@ const RunInfo = props => {
       </div>
       <div className='strava-latest-run-info__pace-wrapper'>
         <FontAwesome name='tachometer' className='strava-latest-run-info__pace-icon'/> 
-        <div className='strava-latest-run-info__pace'> <span className='strava-latest-run-info__pace--large'>{pace}</span> / mile</div>
+        <div className='strava-latest-run-info__pace'> {pace}</div>
       </div>
     </div>
   )
@@ -80,12 +80,15 @@ const MileageGrid = props => {
             >{day}</div>
           )
         })}
-        {props.mileage.map((mileage, index) => (
-          <div 
-            className='mileage-grid__mileage' 
-            key={`mileage-grid-mileage-${index}`}
-          >{mileage || '-'}</div>
-        ))}
+        {props.mileage.map((mileage, index) => {
+          const distance = Math.round(mileage * 10) / 10;
+          return (
+            <div 
+              className='mileage-grid__mileage' 
+              key={`mileage-grid-mileage-${index}`}
+            >{distance || '-'}</div>
+          )
+        })}
       </div>
   )
 }

@@ -2,10 +2,13 @@ const express = require('express');
 const fetch = require('node-fetch');
 const Logger = require('../lib/Logger');
 
-const WEATHER_API_KEY = '211442508a4f74ccbc238952adc10e13';
-const GEOLOCATION_API_KEY = 'AIzaSyCfTBSY_cSN6n2ryygHD32frz1pV_QRK3k';
+const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
+const GEOLOCATION_API_KEY = process.env.GOOGLE_API_KEY;
 const router = express.Router();
 const logger = new Logger('🌤');
+
+logger.log(WEATHER_API_KEY);
+logger.log(GEOLOCATION_API_KEY);
 
 router.get('/forecast', (req, res) => {
   const lat = req.query.lat

@@ -2,8 +2,8 @@ const express = require('express');
 const fetch = require('node-fetch');
 const Logger = require('../lib/Logger');
 
-const TODOIST_CLIENT_ID = '4ddd8c32dc914bc7b5f5ef4b4f8637b3';
-const TODOIST_CLIENT_SECRET = 'ae06fdc4a4084f96986b836fd615632c';
+const TODOIST_CLIENT_ID = process.env.TODOIST_CLIENT_ID;
+const TODOIST_CLIENT_SECRET = process.env.TODOIST_CLIENT_SECRET;
 const TODOIST_AUTH_COOKIE_NAME = 'todoist_token';
 const router = express.Router();
 const logger = new Logger('✅');

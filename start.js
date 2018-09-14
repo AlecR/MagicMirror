@@ -15,6 +15,7 @@ async function startNgrok() {
 }
 
 function startNodemon() {
+  require('dotenv').config();
   nodemon({
     script: 'server',
     ext: 'js'

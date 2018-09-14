@@ -2,8 +2,8 @@ const express = require('express');
 const fetch = require('node-fetch');
 const Logger = require('../lib/Logger');
 
-const HUE_IP = '10.0.0.153'
-const HUE_USERNAME = 'cATamjW4q-RKFR0NxTZPMxU4fBaFST3DCf9lga1S';
+const HUE_IP = process.env.HUE_IP;
+const HUE_USERNAME = process.env.HUE_USERNAME;
 const router = express.Router();
 const logger = new Logger('💡');
 
